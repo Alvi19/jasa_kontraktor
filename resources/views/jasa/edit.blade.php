@@ -6,9 +6,10 @@
             <div class="col card-wrapper">
                 <div class="card">
                     <div class="card-body">
-                        <h1 style="text-align: center">Edit Jual Jasa</h1>
+                        <h1 style="text-align: center" class="text-primary">Edit Jual Jasa</h1>
                         <div class="pb-3"><a href="{{ route('jasa.index') }}" class="btn btn-secondary">
-                                << Kembali</a>
+                                <i class="ti ti-arrow-back-up">
+                                    Kembali</i></a>
                         </div>
                         <form action="{{ route('jasa.update', [$data->id]) }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -27,7 +28,8 @@
                                 <label for="deskripsi" class="form-label">Deskripsi</label>
                                 <textarea class="form-control summernote" rows="8" name="deskripsi" placeholder="deskripsi">{{ $data->deskripsi }}</textarea>
                             </div>
-                            <button class="btn btn-primary" name="simpan" type="submit">SIMPAN</button>
+                            <button class="btn btn-primary" name="simpan" type="submit"><i class="ti ti-device-floppy">
+                                    Simpan</i></button>
                         </form>
                     </div>
                 </div>

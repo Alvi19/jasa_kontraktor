@@ -29,7 +29,7 @@
             <li class="sidebar-item">
                 <a class="sidebar-link" href="/kontraktor" aria-expanded="false">
                     <span>
-                        <i class="ti ti-article"></i>
+                        <i class="ti ti-user-circle"></i>
                     </span>
                     <span class="hide-menu">Data Kontraktor</span>
                 </a>
@@ -37,9 +37,17 @@
             <li class="sidebar-item">
                 <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
                     <span>
-                        <i class="ti ti-alert-circle"></i>
+                        <i class="ti ti-user-circle"></i>
                     </span>
                     <span class="hide-menu">Data Klien</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/jasa" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-package"></i>
+                    </span>
+                    <span class="hide-menu">Jual Jasa</span>
                 </a>
             </li>
             <li class="sidebar-item">
@@ -50,14 +58,7 @@
                     <span class="hide-menu">Riwayat</span>
                 </a>
             </li>
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="/jasa" aria-expanded="false">
-                    <span>
-                        <i class="ti ti-package"></i>
-                    </span>
-                    <span class="hide-menu">Jasa</span>
-                </a>
-            </li>
+
             {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
                     <span>
@@ -66,46 +67,46 @@
                     <span class="hide-menu">Typography</span>
                 </a>
             </li> --}}
-            <li class="nav-small-cap">
+            {{-- <li class="nav-small-cap">
                 <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                 <span class="hide-menu">AUTH</span>
-            </li>
-            <li class="sidebar-item">
+            </li> --}}
+            {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
                     <span>
                         <i class="ti ti-login"></i>
                     </span>
                     <span class="hide-menu">Login</span>
                 </a>
-            </li>
-            <li class="sidebar-item">
+            </li> --}}
+            {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
                     <span>
                         <i class="ti ti-user-plus"></i>
                     </span>
                     <span class="hide-menu">Register</span>
                 </a>
-            </li>
-            <li class="nav-small-cap">
+            </li> --}}
+            {{-- <li class="nav-small-cap">
                 <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                 <span class="hide-menu">EXTRA</span>
-            </li>
-            <li class="sidebar-item">
+            </li> --}}
+            {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
                     <span>
                         <i class="ti ti-mood-happy"></i>
                     </span>
                     <span class="hide-menu">Icons</span>
                 </a>
-            </li>
-            <li class="sidebar-item">
+            </li> --}}
+            {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
                     <span>
                         <i class="ti ti-aperture"></i>
                     </span>
                     <span class="hide-menu">Sample Page</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </nav>
     <!-- End Sidebar navigation -->

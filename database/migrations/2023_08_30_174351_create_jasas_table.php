@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('jasas', function (Blueprint $table) {
             $table->id();
+            $table->string('foto_kontraktor');
             $table->string('nama');
-            $table->integer('harga');
+            $table->string('alamat');
+            $table->integer('jumlah_tukang');
+            $table->string('riwayat_pembangunan');
+            $table->string('foto_pembangunan');
             $table->text('deskripsi');
             $table->timestamps();
         });

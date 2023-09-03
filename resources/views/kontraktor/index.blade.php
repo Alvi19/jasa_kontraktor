@@ -6,7 +6,7 @@
             <div class="col card-wrapper">
                 <div class="card">
                     <div class="card-body">
-                        <h1 style="text-align:left" class="text-primary">Data Kontraktor</h1>
+                        <h1 style="text-align:center" class="text-primary mb-4"><strong>Data Kontraktor</strong></h1>
                         {{-- <div class="pb-3"><a href="" class="btn btn-secondary">
                                 << Kembali</a>
                         </div> --}}

@@ -22,7 +22,6 @@ class JasaController extends Controller
      */
     public function create()
     {
-        // dd('abdsa');
         return view('jasa.create');
     }
 
@@ -31,19 +30,23 @@ class JasaController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nama' => 'required',
-            'harga' => 'required',
-            'deskripsi' => 'required'
+        $validatedData = $this->validate($request, [
+            'nama'               => 'required',
+            'alamat'             => 'required',
+            'jumlah_tukang'      => 'required',
+            'riwayat_pembangunan' => 'required',
+            'deskripsi'          => 'required'
         ]);
 
-        Jasa::create(
-            [
-                'nama' => $request->nama,
-                'harga' => $request->harga,
-                'deskripsi' => $request->deskripsi
-            ]
-        );
+        $file = $request->file('foto_kontraktor');
+        $file = $request->file('foto_pembangunan');
+        $gambar = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('upload'), $gambar);
+
+        $validatedData['foto_kontraktor'] = $gambar;
+        $validatedData['foto_pembangunan'] = $gambar;
+
+        Jasa::create($validatedData);
 
         return redirect()->route('jasa.index');
     }
@@ -70,18 +73,29 @@ class JasaController extends Controller
      */
     public function update(Request $request, Jasa $jasa)
     {
-        $this->validate($request, [
-            'nama' => 'required',
-            'harga' => 'required',
-            'deskripsi' => 'required'
+        $validatedData = $this->validate($request, [
+            'nama'               => 'required',
+            'alamat'             => 'required',
+            'jumlah_tukang'      => 'required',
+            'riwayat_pembangunan' => 'required',
+            'deskripsi'          => 'required'
         ]);
 
-        $data = Jasa::find($jasa->id);
-        $data->nama = $request->nama;
-        $data->harga = $request->harga;
-        $data->deskripsi = $request->deskripsi;
+        Jasa::find($jasa->id)->update($validatedData);
 
-        $data->save();
+        if ($request->hasFile('foto_kontraktor')) {
+            $fotoKontraktor = time() . '_kontraktor_' . $request->file('foto_kontraktor')->getClientOriginalName();
+            $request->file('foto_kontraktor')->move(public_path('upload'), $fotoKontraktor);
+            $jasa->foto_kontraktor = $fotoKontraktor;
+        }
+
+        if ($request->hasFile('foto_pembangunan')) {
+            $fotoPembangunan = time() . '_pembangunan_' . $request->file('foto_pembangunan')->getClientOriginalName();
+            $request->file('foto_pembangunan')->move(public_path('upload'), $fotoPembangunan);
+            $jasa->foto_pembangunan = $fotoPembangunan;
+        }
+
+        $jasa->save();
 
         return redirect()->route('jasa.index');
     }

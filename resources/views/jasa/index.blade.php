@@ -11,17 +11,17 @@
                                     class="ti ti-clipboard-plus"> Tambah Jasa</i></a>
                         </div><br>
                         <div class="table-responsive border-bottom-dark">
-                            <table class="table table-stripped">
+                            <table class="table table-bordered table-stripped">
                                 <thead>
                                     <tr class="text-bold text-dark">
                                         <th>No</th>
                                         <th>Foto Kontraktor</th>
-                                        <th class="col-3">Nama</th>
+                                        <th>Nama</th>
                                         <th class="col-3">Alamat</th>
                                         <th>Jumlah Tukang</th>
-                                        <th>Riwayat Pembangunan</th>
+                                        <th class="col-5">Riwayat Pembangunan</th>
                                         <th>Foto Pembangunan</th>
-                                        <th class="col-3">Desakripsi</th>
+                                        <th class="col-5">Desakripsi</th>
                                         <th class="col-2">Aksi</th>
                                     </tr>
                                 </thead>
@@ -31,7 +31,7 @@
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>
-                                                <img height="100px" src="{{ '/upload/' . $item->foto_kontraktor }}"
+                                                <img height="80px" src="{{ '/upload/' . $item->foto_kontraktor }}"
                                                     alt="">
                                             </td>
                                             <td>{{ $item->nama }}</td>
@@ -39,13 +39,14 @@
                                             <td>{{ $item->jumlah_tukang }}</td>
                                             <td>{{ $item->riwayat_pembangunan }}</td>
                                             <td>
-                                                <img height="100px" src="{{ '/upload/' . $item->foto_pembangunan }}"
+                                                <img height="80px" src="{{ '/upload/' . $item->foto_pembangunan }}"
                                                     alt="">
                                             </td>
                                             <td>{{ $item->deskripsi }}</td>
-                                            <td class="modal-body">
+                                            <td>
                                                 <a href="{{ route('jasa.edit', [$item->id]) }}"
-                                                    class="btn btn-md btn-outline-warning"><i class="ti ti-edit"></i></a>
+                                                    class="btn btn-md btn-outline-warning mb-1"><i
+                                                        class="ti ti-edit"></i></a>
                                                 <form onsubmit="return confirm('Yakin mau hapus data ini?')"
                                                     action="{{ route('jasa.destroy', $item->id) }}" class="d-inline"
                                                     method="POST" enctype="multipart/form-data">

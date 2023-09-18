@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\JasaController;
 use App\Http\Controllers\KontraktorController;
 use Illuminate\Support\Facades\Route;
@@ -15,10 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.app');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('register', [UserController::class, 'register'])->name('auth.register');
+Route::post('register', [UserController::class, 'registerPost']);
+Route::get('/', [UserController::class, 'login'])->name('auth.login');
+Route::post('/', [UserController::class, 'loginPost']);
 
 
-Route::get('kontraktor', [KontraktorController::class, 'index'])->name('kontraktor.index');
+
+Route::resource('kontraktor', KontraktorController::class);
 Route::resource('jasa', JasaController::class);

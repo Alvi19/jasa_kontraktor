@@ -6,14 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Kontraktor extends Model
+class Bangunan extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function user(): BelongsTo
+    public function kontraktor(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Kontraktor::class);
+    }
+
+    public function client(): BelongsTo
+    {
+        return $this->belongsTo(Client::class);
     }
 }

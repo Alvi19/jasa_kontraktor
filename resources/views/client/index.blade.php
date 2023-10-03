@@ -7,7 +7,7 @@
             <div class="col card-wrapper">
                 <div class="card">
                     <div class="card-body">
-                        <h1 style="text-align:center" class="text-primary mb-4"><strong>Data Kontraktor</strong></h1>
+                        <h1 style="text-align:center" class="text-primary mb-4"><strong>Data Client</strong></h1>
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -17,12 +17,12 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ route('kontraktor.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
                                 <input class="form-control summernote" type="text" name="username" placeholder="Username"
-                                    value="{{ old('username') ?? @$data->user->username }}">
+                                    value="{{ old('username') ?? @$user->username }}">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
@@ -32,21 +32,21 @@
                             <div class="mb-3">
                                 <label for="nama" class="form-label">Nama</label>
                                 <input class="form-control summernote" type="text" name="nama_lengkap" placeholder="Nama"
-                                    value="{{ old('nama_lengkap') ?? @$data->user->nama_lengkap }}">
+                                    value="{{ old('nama_lengkap') ?? @$user->nama_lengkap }}">
                             </div>
                             <div class="mb-3">
                                 <label for="alamat" class="form-label">Alamat</label>
                                 <textarea class="form-control summernote" rows="8" name="alamat" placeholder="Alamat">{{ old('alamat') ?? @$data->alamat }}</textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="TTL" class="form-label">Tempat Tanggal Lahir</label>
-                                <input class="form-control summernote" type="text" name="TTL"
-                                    placeholder="Tempat, Tanggal Lahir" value="{{ old('TTL') ?? @$data->TTL }}">
+                                <label for="ttl" class="form-label">Tempat Tanggal Lahir</label>
+                                <input class="form-control summernote" type="text" name="ttl"
+                                    placeholder="Tempat, Tanggal Lahir" value="{{ old('ttl') ?? @$data->ttl }}">
                             </div>
                             <div class="mb-3">
                                 <label for="no_wa" class="form-label">WhatsApp</label>
                                 <input class="form-control summernote" type="number" name="no_wa" placeholder="Whatsapp"
-                                    value="{{ old('whatsApp') ?? @$data->user->no_wa }}">
+                                    value="{{ old('whatsApp') ?? @$user->no_wa }}">
                             </div>
                             <div class="mb-3">
                                 <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
@@ -65,16 +65,7 @@
                                 <input type="file" class="form-control form-control-sm" name="file"
                                     id="exampleInputEmail1" value="{{ old('foto') ?? @$data->foto }}">
                             </div>
-                            <div class="mb-3">
-                                <label for="jumlah_tukang" class="form-label">Jumlah Tukang</label>
-                                <input class="form-control summernote" type="number" name="jumlah_tukang"
-                                    placeholder="Jumlah Tukang"
-                                    value="{{ old('jumlah_tukang') ?? @$data->jumlah_tukang }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="keterangan" class="form-label">Keterangan</label>
-                                <textarea class="form-control summernote" rows="8" name="keterangan" placeholder="Keterangan">{{ old('keterangan') ?? @$data->keterangan }}</textarea>
-                            </div>
+
                             <button class="btn btn-primary" name="simpan" type="submit">SIMPAN</button>
                         </form>
                     </div>

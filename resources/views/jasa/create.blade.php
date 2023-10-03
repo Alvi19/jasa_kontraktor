@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Create Jasa')
 @section('content')
     <div class="container-fluid mt--6">
         <div class="row">

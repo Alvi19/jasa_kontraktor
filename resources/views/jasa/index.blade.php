@@ -1,7 +1,7 @@
 @extends('layouts.app')
-
+@section('title', 'Index')
 @section('content')
-    <div class="container-fluid mt--6">
+    <div class="container-fluid mt-3">
         <div class="row">
             <div class="col card-wrapper">
                 <div class="card">
@@ -13,7 +13,7 @@
                         <div class="table-responsive border-bottom-dark">
                             <table class="table table-bordered table-stripped">
                                 <thead>
-                                    <tr class="text-bold text-dark">
+                                    <tr class="text-bold text-dark bg-gradient">
                                         <th>No</th>
                                         <th>Foto Kontraktor</th>
                                         <th>Nama</th>
@@ -21,7 +21,7 @@
                                         <th>Jumlah Tukang</th>
                                         <th class="col-5">Riwayat Pembangunan</th>
                                         <th>Foto Pembangunan</th>
-                                        <th class="col-5">Desakripsi</th>
+                                        <th class="col-6">Desakripsi</th>
                                         <th class="col-2">Aksi</th>
                                     </tr>
                                 </thead>
@@ -45,16 +45,11 @@
                                             <td>{{ $item->deskripsi }}</td>
                                             <td>
                                                 <a href="{{ route('jasa.edit', [$item->id]) }}"
-                                                    class="btn btn-md btn-outline-warning mb-1"><i
-                                                        class="ti ti-edit"></i></a>
-                                                <form onsubmit="return confirm('Yakin mau hapus data ini?')"
-                                                    action="{{ route('jasa.destroy', $item->id) }}" class="d-inline"
-                                                    method="POST" enctype="multipart/form-data">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-md btn-outline-danger" type="submit"
-                                                        name="submit"><i class="ti ti-trash"></i></button>
-                                                </form>
+                                                    class="btn btn-md btn-warning mb-1"><i class="ti ti-edit"></i></a>
+                                                <button class="btn btn-md btn-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#deleteAlertModal"
+                                                    data-delete-url="{{ route('jasa.destroy', $item->id) }}"><i
+                                                        class="ti ti-trash"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -66,4 +61,43 @@
             </div>
         </div>
     </div>
+    <!-- Alert Modal -->
+    <div class="modal fade" id="deleteAlertModal" tabindex="-1" role="dialog" aria-labelledby="deleteAlertModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAlertModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="ti ti-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus data ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <form id="deleteForm" action="" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $('#deleteAlertModal').on('show.bs.modal', function(event) {
+                console.log();
+                var button = $(event.relatedTarget); // Tombol yang membuka modal
+                var deleteUrl = button.data('delete-url');
+
+                $('#deleteForm').attr('action', deleteUrl);
+            });
+        });
+    </script>
+@endpush

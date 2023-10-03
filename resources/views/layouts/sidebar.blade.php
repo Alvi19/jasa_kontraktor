@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+                <a class="sidebar-link" href="/client" aria-expanded="false">
                     <span>
                         <i class="ti ti-user-circle"></i>
                     </span>
@@ -51,13 +51,38 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+                <a class="sidebar-link" href="/data_client" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-package"></i>
+                    </span>
+                    <span class="hide-menu">Data Client</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/sewakontraktor" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-package"></i>
+                    </span>
+                    <span class="hide-menu">Sewa Kontraktor</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/client" aria-expanded="false">
                     <span>
                         <i class="ti ti-cards"></i>
                     </span>
                     <span class="hide-menu">Riwayat</span>
                 </a>
             </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/data_sewa" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-cards"></i>
+                    </span>
+                    <span class="hide-menu">Data Sewa</span>
+                </a>
+            </li>
+
 
             {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">

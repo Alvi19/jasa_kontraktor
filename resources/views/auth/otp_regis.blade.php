@@ -34,15 +34,15 @@
                                         </ul>
                                     </div>
                                 @endif
-                                <form action="{{ route('auth.register') }}" method="POST">
+                                <form action="{{ route('otpVerification') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="otp_register" class="form-label">OTP Register</label>
-                                        <input type="number" class="form-control" id="No WhatsApp" name="otp_register"
+                                        <input type="number" class="form-control" id="otp_register" name="otp_register"
                                             aria-describedby="textHelp">
                                     </div>
-                                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign
-                                        Up</button>
+                                    <button type="submit"
+                                        class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Verify</button>
                                 </form>
                             </div>
                         </div>

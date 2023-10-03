@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->string('no_wa');
             $table->string('otp_register')->nullable();
-            $table->enum('status', ['admin', 'kontraktor', 'klien']);
+            $table->enum('status', ['admin', 'kontraktor', 'client']);
             $table->string('foto_profile')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -12,7 +12,7 @@ class RiwayatController extends Controller
      */
     public function index($id)
     {
-        $data = Progress::all();
+        $data = Progress::paginate(10);
         return view('data-client.riwayat', compact('id', 'data'));
     }
 
@@ -57,24 +57,54 @@ class RiwayatController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id, string $idprogress)
     {
-        //
+        $data = Progress::find($idprogress);
+        return view('data-client.edit')->with(compact('data', 'id', 'idprogress'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id, string $idprogress)
     {
-        //
+        $validatedData = $this->validate($request, [
+            'tanggal'               => 'required',
+            'deskripsi'          => 'required'
+        ]);
+
+        $progress = Progress::findOrFail($idprogress);
+
+        if ($request->hasFile('gambar')) {
+            $oldImagePath = public_path('upload/' . $progress->gambar);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+
+            $file = $request->file('gambar');
+            $gambar = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('upload'), $gambar);
+            $validatedData['gambar'] = $gambar;
+        }
+        $progress->update($validatedData);
+
+        return redirect()->route('data_client.contractor.progress', compact('id', 'idprogress'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, $idprogress)
     {
-        //
+        $progress = Progress::findOrFail($idprogress);
+
+        $imagePath = public_path('upload/' . $progress->gambar);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        $progress->delete();
+
+        return redirect()->route('data_client.contractor.progress', compact('id', 'idprogress'));
     }
 }

@@ -7,7 +7,8 @@
             <div class="col card-wrapper">
                 <div class="card">
                     <div class="card-body">
-                        <h1 style="text-align:center" class="text-primary mb-4"><strong>Data Kontraktor</strong></h1>
+                        <h1 style="text-align:start" class="text-primary mb-4"><strong>Data Kontraktor</strong></h1>
+                        <hr class="py-2 mb-1 my-2">
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>

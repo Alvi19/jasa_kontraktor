@@ -31,6 +31,21 @@ class User extends Authenticatable
         return $this->hasOne(Kontraktor::class);
     }
 
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    public function chats()
+    {
+        return $this->sentMessages->concat($this->receivedMessages)->sortBy('created_at');
+    }
+
     // protected $fillable = [
     //     'name',
     //     'email',

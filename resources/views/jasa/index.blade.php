@@ -6,12 +6,13 @@
             <div class="col card-wrapper">
                 <div class="card">
                     <div class="card-body border">
-                        <h1 style="text-align: center" class="text-primary mb-5"><strong>Jual Jasa</strong></h1>
+                        <h1 style="text-align: start" class="text-primary mb-3 "><strong>Jual Jasa</strong></h1>
+                        <hr class="my-3">
                         <div class="pd-5"><a href="/jasa/create" class="btn btn-md btn-primary"><i
                                     class="ti ti-clipboard-plus"> Tambah Jasa</i></a>
                         </div><br>
                         <div class="table-responsive border-bottom-dark">
-                            <table class="table table-bordered table-stripped">
+                            <table class="table table-bordered table-stripped table-hover m-0">
                                 <thead>
                                     <tr class="text-bold text-dark bg-gradient">
                                         <th>No</th>

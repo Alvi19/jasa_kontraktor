@@ -6,7 +6,15 @@
             <div class="col card-wrapper">
                 <div class="card">
                     <div class="card-body border">
-                        <h1 style="text-align: center" class="text-primary mb-5"><strong>Edit Jual Jasa</strong></h1>
+                        <h1 style="text-align: start" class=" mb-2"><strong>Edit Jual Jasa</strong></h1>
+                        <hr class="my-2">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="font-italic"><a href="{{ route('jasa.index') }}">Jual Jasa</a>
+                                </li>
+                                <li class="ti ti-chevron-right mt-1 font-italic"><a href="">Edit Jual Jasa</a></li>
+                            </ol>
+                        </nav>
                         <div class="pb-3"><a href="{{ route('jasa.index') }}" class="btn btn-secondary">
                                 <i class="ti ti-arrow-back-up">
                                     Kembali</i></a>

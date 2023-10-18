@@ -20,7 +20,6 @@ class ClientController extends Controller
         return view('client.index')->with(compact('data', 'user'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      */

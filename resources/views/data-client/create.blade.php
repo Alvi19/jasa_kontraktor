@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>Create Progress</h2>
-                <div class="pb-3"><a href="/data_client/{{ $id }}/contractor-progress" class="btn btn-secondary">
+                <div class="pb-3"><a href="/data_client/{{ $id }}/contractor-progress" class="btn btn-primary">
                         <i class="ti ti-arrow-back-up">
                             Kembali</i></a>
                 </div>
@@ -25,8 +25,7 @@
                         <input type="file" class="form-control form-control-sm" name="gambar" id="gambar"
                             value="{{ old('gambar') }}">
                     </div>
-                    <button class="btn btn-outline-primary mt-2" name="simpan" type="submit"><i
-                            class="ti ti-device-floppy">
+                    <button class="btn btn-secondary mt-2" name="simpan" type="submit"><i class="ti ti-device-floppy">
                             Simpan</i></button>
                 </form>
             </div>

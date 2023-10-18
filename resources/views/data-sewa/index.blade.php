@@ -1,12 +1,13 @@
 @extends('layouts.app')
 @section('title', 'Data Client')
 @section('content')
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-3">
+        {{-- <x-breadcrumbs :breadcrumbs="$breadcrumbs" /> --}}
         <div class="row">
             <div class="col card-wrapper">
                 <div class="card">
                     <div class="card-body border">
-                        <h1 style="text-align: center" class="text-primary mb-5"><strong>Data Sewa</strong></h1>
+                        <h1 style="text-align: start" class="text-primary mb-5"><strong>Data Sewa</strong></h1>
                         {{-- <div class="pd-5"><a href="/jasa/create" class="btn btn-md btn-primary"><i
                                     class="ti ti-clipboard-plus"> Tambah Jasa</i></a>
                         </div><br> --}}

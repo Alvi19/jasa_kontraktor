@@ -1,17 +1,19 @@
 @extends('layouts.app')
 @section('title', 'Data Client')
 @section('content')
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-2">
+        {{-- <x-breadcrumbs :breadcrumbs="$breadcrumbs" /> --}}
         <div class="row">
             <div class="col card-wrapper">
                 <div class="card">
-                    <div class="card-body border">
-                        <h1 style="text-align: center" class="text-primary mb-5"><strong>Data Client</strong></h1>
+                    <div class="card-body border p-4">
+                        <h1 style="text-align: start" class="text-primary mb-3"><strong>Data Client</strong></h1>
+                        <hr class="my-0 py-2">
                         {{-- <div class="pd-5"><a href="/jasa/create" class="btn btn-md btn-primary"><i
                                     class="ti ti-clipboard-plus"> Tambah Jasa</i></a>
                         </div><br> --}}
                         <div class="table-responsive border-bottom-dark">
-                            <table class="table table-bordered table-stripped">
+                            <table class="table table-bordered table-stripped table-hover m-0">
                                 <thead>
                                     <tr class="text-bold text-dark bg-gradient">
                                         <th>No</th>
@@ -19,13 +21,13 @@
                                         <th class="col-3">Tanggal Mulai</th>
                                         <th class="col-3">Luas Lahan</th>
                                         <th class="col-3">Luas Bangunan</th>
-                                        <th>Alamat</th>
-                                        <th class="col-3">Jumlah Tukang</th>
-                                        <th class="col-3">Jumlah Ruangan</th>
+                                        <th class="col-3">Alamat</th>
+                                        <th>Jumlah Tukang</th>
+                                        <th>Jumlah Ruangan</th>
                                         <th class="col-3">Jenis Pengerjaan</th>
                                         <th class="col-3">Catatan</th>
                                         <th class="col-3">Harga</th>
-                                        <th class="col-2">Aksi</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,7 +53,8 @@
                                                 <button class="btn btn-md m-2 btn-danger" data-bs-toggle="modal"
                                                     data-bs-target="#deleteAlertModal" data-delete-url=""><i
                                                         class="ti"></i>Tolak</button>
-                                                <a href="" class="btn btn-md btn-primary m-2"><i
+                                                <a href="{{ route('chat.show', ['chat' => $item->client->user_id]) }}"
+                                                    class="btn btn-md btn-primary m-2"><i
                                                         class="ti ti-message-2"></i>Chat</a>
                                                 <a href="{{ route('data_client.contractor.progress', $item->id) }}"
                                                     class="btn btn-md btn-primary m-2"><i
@@ -62,6 +65,24 @@
                                 </tbody>
                             </table>
                         </div>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                {{-- {{ $data->links() }} --}}
+                                {{-- <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li> --}}
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

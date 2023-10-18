@@ -49,6 +49,7 @@
                                                     data-bs-target="#setujuiAlertModal"
                                                     data-update-url="{{ route('data_client.update', $item->id) }}"
                                                     data-harga="{{ $item->harga }}"
+                                                    data-tanggal="{{ $item->payment->payment_date }}"
                                                     data-sukses-url="{{ route('data_client.postSukses', $item->id) }}"><i
                                                         class="ti"></i>Bayar</button>
                                                 <a class="btn btn-md m-2 btn-primary"
@@ -87,10 +88,15 @@
                         @method('PUT')
                         <div class="form-group mb-2">
                             <label>Total Pembayaran: Rp.</label>
-                            <span id="harga"></span>
+                            <span id="harga" class=""></span>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label>Tanggal Pembayaran :</label>
+                            <span id="tanggal"></span>
                         </div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <a id="payment" type="submit" class="btn btn-primary" id="simpanHarga">Bayar</a>
+                        <a id="payment" type="submit" class="btn btn-primary" id="simpanHarga">Bayar
+                            Sekarang</a>
                     </form>
                 </div>
             </div>
@@ -100,33 +106,22 @@
 @endsection
 @push('script')
     <script>
-        // Fungsi ini akan dipanggil ketika tombol "Distujui" diklik
         $(document).ready(function() {
             $('#setujuiAlertModal').on('show.bs.modal', function(event) {
                 console.log();
                 // Tampilkan modal
-                var button = $(event.relatedTarget); // Tombol yang membuka modal
+                var button = $(event.relatedTarget);
 
                 var updateUrl = button.data('update-url');
                 var suksesUrl = button.data('sukses-url');
                 var harga = button.data('harga');
+                var tanggal = button.data('tanggal');
 
                 $('#updateForm').attr('action', updateUrl);
                 $('#modalHarga').modal('show');
                 $('#payment').attr('href', suksesUrl);
                 $('#harga').html(harga);
-
-
-
-                // Fungsi ini akan dipanggil saat tombol "Simpan" di dalam modal ditekan
-                // $('#simpanHarga').click(function() {
-                //     // Ambil nilai dari input harga
-                //     var harga = $('#harga').val();
-
-                //     // Lakukan sesuatu dengan nilai harga (misalnya, kirim ke server dengan AJAX)
-
-                //     // Tutup modal
-                //     $('#modalHarga').modal('hide');
+                $('#tanggal').html(tanggal);
             });
         });
     </script>

@@ -17,25 +17,58 @@ class DataSewaController extends Controller
         return view('data-sewa.index', compact('data'));
     }
 
-    public function suksesPayment($id)
+    public function payment($id)
     {
-        $data = Bangunan::find($id);
+        $data = Payment::find($id);
         // dd($data);
-        return view('data-sewa.sukses', compact('data'));
+
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $id,
+                'gross_amount' => $data->amount,
+            ),
+            'customer_details' => array(
+                'name' => auth()->user()->name,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        // dd($snapToken);
+
+        return view('data-sewa.payment', compact('data', 'snapToken'));
+    }
+
+    public function callback(Request $request)
+    {
+        $serverKey = config('midtrans.server_key');
+        $hashed = hash("sha15", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+        if ($hashed == $request->signature_key) {
+            if ($request->transaction_status == 'capture') {
+                $data = Payment::find($request->id);
+                $data->update(['status' => 'Paid']);
+            }
+        }
     }
 
     public function postSuksesPayment($id)
     {
         $data = Bangunan::find($id);
         // dd($data);
-        Payment::create([
+        $payment =  Payment::create([
             'bangunan_id' => $id,
             'amount' => $data->harga,
             'payment_date' => now(),
         ]);
 
-
-        return redirect()->route('data_client.sukses', $id);
+        return redirect()->route('data_client.sukses', $payment->id);
     }
 
     // public function contractorProgress()

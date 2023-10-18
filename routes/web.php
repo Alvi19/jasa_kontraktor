@@ -46,7 +46,8 @@ Route::get('/sewakontraktor/detailkontraktor/{id}', [SewaKontraktorController::c
 Route::resource('form', FormulirController::class);
 Route::resource('data_client', DataClientController::class);
 Route::resource('data_sewa', DataSewaController::class);
-Route::get('/data_sewa/{id}/sukses', [DataSewaController::class, 'suksesPayment'])->name('data_client.sukses');
+Route::get('/data_sewa/{id}/sukses', [DataSewaController::class, 'payment'])->name('data_client.sukses');
+Route::post('/data_sewa/{id}/callback', [DataSewaController::class, 'callback'])->name('data_client.callback');
 Route::get('/data_sewa/{id}/post-sukses', [DataSewaController::class, 'postSuksesPayment'])->name('data_client.postSukses');
 Route::get('/data_client/{id}/contractor-progress', [RiwayatController::class, 'index'])->name('data_client.contractor.progress');
 Route::get('/data-client/{id}/progress/create', [RiwayatController::class, 'create'])->name('data_client.progress.create');

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Bangunan::class)->constrained()->cascadeOnDelete();
             $table->decimal('amount', 10, 2);
             $table->date('payment_date');
+            $table->enum('status', ['Unpaid', 'Paid']);
             $table->timestamps();
         });
     }

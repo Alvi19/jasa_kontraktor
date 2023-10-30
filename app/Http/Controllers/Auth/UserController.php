@@ -25,8 +25,14 @@ class UserController extends Controller
         // dd($validatedData);
         if (Auth::attempt($validatedData)) {
             $request->session()->regenerate();
-            return redirect()->route('kontraktor.index')
-                ->withSuccess('You have successfully logged in!');
+            $auth = Auth::user();
+            if ($auth->status == 'client') {
+                return redirect()->route('client.index')
+                    ->withSuccess('You have successfully logged in!');
+            } else {
+                return redirect()->route('kontraktor.index')
+                    ->withSuccess('You have successfully logged in!');
+            }
         }
 
         return back()->withErrors([

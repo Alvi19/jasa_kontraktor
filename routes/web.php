@@ -7,13 +7,9 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ChattingController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DataClientController;
-use App\Http\Controllers\DataSewaController;
 use App\Http\Controllers\FormulirController;
-use App\Http\Controllers\GroupChatController;
 use App\Http\Controllers\JasaController;
 use App\Http\Controllers\KontraktorController;
-use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\SewaController;
 use App\Http\Controllers\SewaKontraktorController;
 use Illuminate\Support\Facades\Route;
@@ -62,9 +58,6 @@ Route::middleware('auth:web')->group(function () {
     // CLIENT SEWA KONTRAKTOR
     Route::get('/sewakontraktor/detailkontraktor/{id}', [SewaKontraktorController::class,  'show'])->name('detailkontraktor');
     Route::resource('form', FormulirController::class);
-    Route::resource('data_client', DataClientController::class);
-    Route::resource('data_sewa/tagihan', BangunanTagihanController::class);
-    Route::resource('data_sewa', DataSewaController::class);
 
     // DATA SEWA
     // - FOR CLIENT

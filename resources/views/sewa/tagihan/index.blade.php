@@ -50,15 +50,13 @@
                             <td>{{ $item->harga }}</td>
                             <td>{{ $item->status }}</td>
                             <td>
-                                @if (auth()->user()->status == 'kontraktor') <a
+                                @if (auth()->user()->status == 'kontraktor' && $item->status == 'menunggu') <a
                                     href="{{ route('data_client.tagihan.edit', [$bangunan, $item->id]) }}"
                                     class="btn btn-md btn-warning mb-1"><i class="ti ti-edit"></i></a>
-                                @if ($item->status == 'menunggu')
                                 <button class="btn btn-md btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#deleteAlertModal"
                                     data-delete-url="{{ route('data_client.tagihan.destroy', [$bangunan, $item->id]) }}"><i
                                         class="ti ti-trash"></i></button>
-                                @endif
                                 @endif
 
                                 @if (auth()->user()->status == 'client' && $item->status == 'menunggu')

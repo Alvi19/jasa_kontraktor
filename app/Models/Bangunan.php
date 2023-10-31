@@ -12,6 +12,16 @@ class Bangunan extends Model
 
     protected $guarded = [];
 
+    public function progress()
+    {
+        return $this->hasMany(Progress::class);
+    }
+
+    public function tagihan()
+    {
+        return $this->hasMany(BangunanTagihan::class);
+    }
+
     public function kontraktor(): BelongsTo
     {
         return $this->belongsTo(Kontraktor::class);
@@ -25,5 +35,11 @@ class Bangunan extends Model
     public function payment()
     {
         return $this->hasOne(Payment::class);
+    }
+
+    public function totalTagihan()
+    {
+        // sum dimana status menunggu
+        return $this->tagihan()->where('status', 'menunggu')->sum('harga');
     }
 }

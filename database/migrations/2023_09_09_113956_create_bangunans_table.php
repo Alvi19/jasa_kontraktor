@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('jenis_pengerjaan');
             $table->string('catatan');
             $table->bigInteger('harga')->nullable();
-            $table->enum('status', ['menuggu', 'disetujui', 'ditolak'])->default('menuggu');
+            $table->enum('status', ['menunggu', 'proses', 'ditolak', 'selesai'])->default('menunggu');
             $table->timestamps();
         });
     }

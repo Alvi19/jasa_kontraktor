@@ -48,7 +48,7 @@ class FormulirController extends Controller
 
         Bangunan::create($validatedData);
 
-        return redirect()->route('detailkontraktor', ['id' => $request->kontraktor_id]);
+        return redirect()->route('data_sewa.index');
     }
 
     /**

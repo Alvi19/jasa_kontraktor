@@ -20,22 +20,21 @@
                     <div class="col-md-8 col-lg-6 col-xxl-3">
                         <div class="card mb-0">
                             <div class="card-body">
-                                <a href="{{ route('auth.login') }}"
+                                <a href="{{ route('login') }}"
                                     class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                    <img src="/asset/template/src/assets/images/logos/dark-logo.svg" width="180"
-                                        alt="">
+                                    <img src="/asset/template/src/assets/images/logos/dark-logo.svg" width="180" alt="">
                                 </a>
                                 <p class="text-center">Your Account Login !</p>
                                 @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                                 @endif
-                                <form action="{{ route('auth.login') }}" method="POST">
+                                <form action="{{ route('login') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Username</label>
@@ -79,23 +78,23 @@
 </html>
 
 {{-- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
-<form action="{{ route('auth.login') }}" method="POST">
+<form action="{{ route('login') }}" method="POST">
     @csrf
     <div class="form-group">
-        <input type="text" class="form-control form-control-user" id="username"
-            aria-describedby="emailHelp" placeholder="Username" name="username">
+        <input type="text" class="form-control form-control-user" id="username" aria-describedby="emailHelp"
+            placeholder="Username" name="username">
     </div>
     <div class="form-group">
-        <input type="password" class="form-control form-control-user"
-            id="exampleInputPassword" placeholder="Password" name="password">
+        <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password"
+            name="password">
     </div>
 
     <button type="submit" class="btn btn-primary btn-user btn-block">

@@ -84,7 +84,7 @@ class ChatController extends Controller
         $data = Message::whereIn('sender_id', [Auth::user()->id, $id])->whereIn('receiver_id', [Auth::user()->id, $id])->orderBy('created_at', 'asc')->get();
 
         // dd($data);
-        return view('data-client.chat', compact('data', 'id'));
+        return view('chat', compact('data', 'id'));
         // } else {
         // return redirect()->route('chat.index')->with('error', 'Anda hanya dapat mengakses obrolan sebagai klien.');
         // }

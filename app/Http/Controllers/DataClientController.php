@@ -67,16 +67,23 @@ class DataClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Bangunan $data_client)
     {
+        $bangunan = $data_client;
         // dd(Request::all());
         $validatedData = $this->validate($request, [
-            'harga'               => 'required',
+            'harga'               => 'required|numeric',
+            'dp_awal'               => 'required|numeric',
         ]);
 
-        $bangunan = Bangunan::find($id)->update($validatedData);
+        $bangunan->harga = $validatedData['harga'];
+        $bangunan->status = 'proses';
+        $bangunan->save();
 
-        // $bangunan->save();
+        $bangunan->tagihan()->create([
+            'nama_tagihan' => 'DP',
+            'harga' => $validatedData['dp_awal'],
+        ]);
 
         return redirect()->route('data_client.index');
     }

@@ -1,6 +1,6 @@
 <div>
     <div class="brand-logo d-flex align-items-center justify-content-between">
-        <a href="/dashboard" class="text-nowrap logo-img">
+        <a href="/" class="text-nowrap logo-img">
             <img src="{{ asset('/asset/image/logo.jpeg') }}"
                 style="padding-top: 10px; width: 40px; height: 50px; vertical-align: middle;" alt="Logo" />
             <span class="text-warning font-weight-bold text-bold"
@@ -19,7 +19,7 @@
                 <span class="hide-menu">Home</span>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="/dashboard" aria-expanded="false">
+                <a class="sidebar-link" href="/" aria-expanded="false">
                     <span>
                         <i class="ti ti-layout-dashboard"></i>
                     </span>
@@ -27,63 +27,71 @@
                 </a>
             </li>
             @if (auth()->user()->status == 'kontraktor')
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="/kontraktor" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-user-circle"></i>
-                        </span>
-                        <span class="hide-menu">Data Kontraktor</span>
-                    </a>
-                </li>
-            @endif
-            @if (auth()->user()->status == 'client')
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="/client" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-user-circle"></i>
-                        </span>
-                        <span class="hide-menu">Data Klien</span>
-                    </a>
-                </li>
-            @endif
-            @if (auth()->user()->status == 'kontraktor')
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="/jasa" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-package"></i>
-                        </span>
-                        <span class="hide-menu">Jual Jasa</span>
-                    </a>
-                </li>
-            @endif
-            @if (auth()->user()->status == 'kontraktor')
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="/data_client" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-users"></i>
-                        </span>
-                        <span class="hide-menu">Data Client</span>
-                    </a>
-                </li>
-            @endif
-            @if (auth()->user()->status == 'client')
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="/sewakontraktor" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-package"></i>
-                        </span>
-                        <span class="hide-menu">Sewa Kontraktor</span>
-                    </a>
-                </li>
-            @endif
             <li class="sidebar-item">
+                <a class="sidebar-link" href="/kontraktor" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-user-circle"></i>
+                    </span>
+                    <span class="hide-menu">Data Kontraktor</span>
+                </a>
+            </li>
+            @endif
+            @if (auth()->user()->status == 'client')
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/client" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-user-circle"></i>
+                    </span>
+                    <span class="hide-menu">Data Klien</span>
+                </a>
+            </li>
+            @endif
+            @if (auth()->user()->status == 'kontraktor')
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/jasa" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-package"></i>
+                    </span>
+                    <span class="hide-menu">Jual Jasa</span>
+                </a>
+            </li>
+            @endif
+            @if (auth()->user()->status == 'kontraktor')
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/data-client" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-users"></i>
+                    </span>
+                    <span class="hide-menu">Data Client</span>
+                </a>
+            </li>
+            @endif
+            @if (auth()->user()->status == 'client')
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/data-sewa" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-cards"></i>
+                    </span>
+                    <span class="hide-menu">Data Sewa</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/sewakontraktor" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-package"></i>
+                    </span>
+                    <span class="hide-menu">Sewa Kontraktor</span>
+                </a>
+            </li>
+            @endif
+            {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="index.html" aria-expanded="false">
                     <span>
                         <i class="ti ti-history"></i>
                     </span>
                     <span class="hide-menu">Riwayat</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="sidebar-item">
                 <a class="sidebar-link" href="/chat" aria-expanded="false">
                     <span>
@@ -92,17 +100,6 @@
                     <span class="hide-menu">Chat</span>
                 </a>
             </li>
-            @if (auth()->user()->status == 'client')
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="/data_sewa" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-cards"></i>
-                        </span>
-                        <span class="hide-menu">Data Sewa</span>
-                    </a>
-                </li>
-            @endif
-
 
             {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">

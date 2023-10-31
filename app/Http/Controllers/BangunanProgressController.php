@@ -2,32 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bangunan;
 use App\Models\Progress;
 use Illuminate\Http\Request;
 
-class RiwayatController extends Controller
+class BangunanProgressController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index(Bangunan $bangunan)
     {
-        $data = Progress::paginate(10);
-        return view('data-client.riwayat', compact('id', 'data'));
+        $id = $bangunan->id;
+        $data = $bangunan->progress()->paginate(10);
+        return view('sewa.progress.index', compact('id', 'data'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
+    public function create(Bangunan $bangunan)
     {
-        return view('data-client.create', compact('id'));
+        $id = $bangunan->id;
+
+        return view('sewa.progress.create', compact('id'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, Bangunan $bangunan)
     {
         $validatedData = $this->validate($request, [
             'tanggal'             => 'required',
@@ -39,19 +43,19 @@ class RiwayatController extends Controller
         $file->move(public_path('upload'), $gambar);
 
         $validatedData['gambar'] = $gambar;
-        $validatedData['bangunan_id'] = $id;
 
-        Progress::create($validatedData);
+        $bangunan->progress()->create($validatedData);
 
-        return redirect()->route('data_client.contractor.progress', compact('id'));
+        return redirect()->route('data_client.progress.index', compact('bangunan'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Bangunan $id)
     {
-        //
+        $data = Progress::paginate(10);
+        return view('sewa.progress.riwayat', compact('id', 'data'));
     }
 
     /**
@@ -60,20 +64,18 @@ class RiwayatController extends Controller
     public function edit($id, string $idprogress)
     {
         $data = Progress::find($idprogress);
-        return view('data-client.edit')->with(compact('data', 'id', 'idprogress'));
+        return view('sewa.progress.edit')->with(compact('data', 'id', 'idprogress'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id, string $idprogress)
+    public function update(Request $request, Bangunan $bangunan, Progress $progress)
     {
         $validatedData = $this->validate($request, [
             'tanggal'               => 'required',
             'deskripsi'          => 'required'
         ]);
-
-        $progress = Progress::findOrFail($idprogress);
 
         if ($request->hasFile('gambar')) {
             $oldImagePath = public_path('upload/' . $progress->gambar);
@@ -88,16 +90,14 @@ class RiwayatController extends Controller
         }
         $progress->update($validatedData);
 
-        return redirect()->route('data_client.contractor.progress', compact('id', 'idprogress'));
+        return redirect()->route('data_client.progress.index', compact('bangunan'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id, $idprogress)
+    public function destroy(Bangunan $bangunan, Progress $progress)
     {
-        $progress = Progress::findOrFail($idprogress);
-
         $imagePath = public_path('upload/' . $progress->gambar);
         if (file_exists($imagePath)) {
             unlink($imagePath);
@@ -105,6 +105,6 @@ class RiwayatController extends Controller
 
         $progress->delete();
 
-        return redirect()->route('data_client.contractor.progress', compact('id', 'idprogress'));
+        return redirect()->route('data_client.progress.index', compact('bangunan'));
     }
 }

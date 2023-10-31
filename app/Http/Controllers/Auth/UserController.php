@@ -90,4 +90,11 @@ class UserController extends Controller
             'otp' => 'Kode OTP tidak valid.',
         ]);
     }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('login');
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\BangunanProgressController;
+use App\Http\Controllers\BangunanTagihanController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ChattingController;
 use App\Http\Controllers\ClientController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\GroupChatController;
 use App\Http\Controllers\JasaController;
 use App\Http\Controllers\KontraktorController;
 use App\Http\Controllers\RiwayatController;
+use App\Http\Controllers\SewaController;
 use App\Http\Controllers\SewaKontraktorController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,33 +33,72 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [UserController::class, 'login'])->name('auth.login');
-Route::post('/', [UserController::class, 'loginPost']);
-Route::get('register', [UserController::class, 'register'])->name('auth.register');
-Route::post('register', [UserController::class, 'registerPost']);
-Route::get('/otp-verification', [UserController::class, 'otpVerification'])->name('otpVerification');
-Route::post('/otp-verification', [UserController::class, 'otpVerificationPost']);
 
-Route::resource('dashboard', DashboardController::class);
-Route::resource('kontraktor', KontraktorController::class);
-Route::resource('jasa', JasaController::class);
-Route::resource('client', ClientController::class);
-Route::resource('sewakontraktor', SewaKontraktorController::class);
-Route::get('/sewakontraktor/detailkontraktor/{id}', [SewaKontraktorController::class,  'show'])->name('detailkontraktor');
-Route::resource('form', FormulirController::class);
-Route::resource('data_client', DataClientController::class);
-Route::resource('data_sewa', DataSewaController::class);
-Route::get('/data_sewa/{id}/sukses', [DataSewaController::class, 'payment'])->name('data_client.sukses');
-Route::post('/data_sewa/{id}/callback', [DataSewaController::class, 'callback'])->name('data_client.callback');
-Route::get('/data_sewa/{id}/post-sukses', [DataSewaController::class, 'postSuksesPayment'])->name('data_client.postSukses');
-Route::get('/data_client/{id}/contractor-progress', [RiwayatController::class, 'index'])->name('data_client.contractor.progress');
-Route::get('/data-client/{id}/progress/create', [RiwayatController::class, 'create'])->name('data_client.progress.create');
-Route::post('/data-client/{id}/progress/create', [RiwayatController::class, 'store'])->name('data_client.progress.store');
-Route::get('/data-client/{id}/progress/{idprogress}/edit', [RiwayatController::class, 'edit'])->name('data_client.progress.edit');
-Route::put('/data-client/{id}/progress/{idprogress}/update', [RiwayatController::class, 'update'])->name('data_client.progress.update');
-Route::delete('/data-client/{id}/progress/{idprogress}/delete', [RiwayatController::class, 'destroy'])->name('data_client.progress.destroy');
-Route::resource('chat', ChatController::class);
-Route::post('/chat/{id}', [ChatController::class, 'send'])->name('chat.send');
-// Route::get('chat_list', [ChattingController::class, 'index'])->name('chat_list');
-// Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
-// Route::get('/chat/{id}', [ChatController::class, 'show'])->name('chat.show');
+// AUTH ROUTE
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [UserController::class, 'login'])->name('login');
+    Route::post('/login', [UserController::class, 'loginPost']);
+    Route::get('register', [UserController::class, 'register'])->name('auth.register');
+    Route::post('register', [UserController::class, 'registerPost']);
+    Route::get('/otp-verification', [UserController::class, 'otpVerification'])->name('otpVerification');
+    Route::post('/otp-verification', [UserController::class, 'otpVerificationPost']);
+});
+
+// AFTER LOGIN
+Route::middleware('auth:web')->group(function () {
+    // LOGOUT
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+    // DASHBOARD
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    // CHAT FEATURE
+    Route::resource('chat', ChatController::class);
+    Route::post('/chat/{id}', [ChatController::class, 'send'])->name('chat.send');
+
+    // SEWA FEATURE
+
+
+    // CLIENT SEWA KONTRAKTOR
+    Route::get('/sewakontraktor/detailkontraktor/{id}', [SewaKontraktorController::class,  'show'])->name('detailkontraktor');
+    Route::resource('form', FormulirController::class);
+    Route::resource('data_client', DataClientController::class);
+    Route::resource('data_sewa/tagihan', BangunanTagihanController::class);
+    Route::resource('data_sewa', DataSewaController::class);
+
+    // DATA SEWA
+    // - FOR CLIENT
+    Route::prefix('/data-sewa')->as('data_sewa.')->group(function () {
+        Route::resource('/', SewaController::class);
+
+        Route::group(['prefix' => '{bangunan}'], function () {
+            Route::resource('progress', BangunanProgressController::class);
+            Route::resource('tagihan', BangunanTagihanController::class);
+        });
+    });
+    // - FOR KONTRAKTOR
+    Route::prefix('/data-client')->as('data_client.')->group(function () {
+        Route::resource('/', SewaController::class);
+
+        Route::group(['prefix' => '{bangunan}'], function () {
+            Route::resource('progress', BangunanProgressController::class);
+            Route::resource('tagihan', BangunanTagihanController::class);
+
+            Route::get('tagihan/{tagihan}/pay', [BangunanTagihanController::class, 'pay'])->name('tagihan.pay');
+            Route::get('tagihan/{tagihan}/pay-success', [BangunanTagihanController::class, 'paySuccess'])->name('tagihan.pay_success');
+            Route::get('tagihan/{tagihan}/pay-failed', [BangunanTagihanController::class, 'payFailed'])->name('tagihan.pay_failed');
+        });
+    });
+
+    // KONTRAKTOR ONLY
+    Route::resource('kontraktor', KontraktorController::class);
+    Route::resource('jasa', JasaController::class);
+
+    // CLIENT ONLY
+    Route::resource('client', ClientController::class);
+    Route::resource('sewakontraktor', SewaKontraktorController::class);
+});
+
+Route::get('chat_list', [ChattingController::class, 'index'])->name('chat_list');
+Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+Route::get('/chat/{id}', [ChatController::class, 'show'])->name('chat.show');

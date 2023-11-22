@@ -33,17 +33,19 @@ class KontraktorController extends Controller
     {
         $validatedData = $this->validate($request, [
             'username'               => 'required',
-            'nama_lengkap'            => 'required',
+            'nama_lengkap'           => 'required',
             'alamat'                 => 'required',
             'TTL'                    => 'required',
             'no_wa'                  => 'required',
             'jenis_kelamin'          => 'required',
             'jumlah_tukang'          => 'required',
             'keterangan'             => 'required',
+            'nama_bank'              => 'nullable',
+            'rekening'               => 'nullable'
         ]);
 
         $userValue = $request->only('username', 'passowrd', 'nama_lengkap', 'no_wa', 'foto_profile');
-        $kontraktorValue = $request->only('alamat', 'TTL', 'email', 'jenis_kelamin', 'foto', 'jumlah_tukang', 'keterangan');
+        $kontraktorValue = $request->only('alamat', 'TTL', 'email', 'jenis_kelamin', 'foto', 'jumlah_tukang', 'keterangan', 'nama_bank', 'rekening');
 
 
         $kontraktor = Kontraktor::where('user_id', auth()->user()->id)->first();

@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormulirController;
 use App\Http\Controllers\JasaController;
 use App\Http\Controllers\KontraktorController;
+use App\Http\Controllers\PenghasilanController;
 use App\Http\Controllers\SewaController;
 use App\Http\Controllers\SewaKontraktorController;
 use Illuminate\Support\Facades\Route;
@@ -86,6 +87,12 @@ Route::middleware('auth:web')->group(function () {
     // KONTRAKTOR ONLY
     Route::resource('kontraktor', KontraktorController::class);
     Route::resource('jasa', JasaController::class);
+    Route::prefix('penghasilan')
+        ->as('penghasilan.')
+        ->controller(PenghasilanController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/ambil', 'ambil')->name('ambil');
+        });
 
     // CLIENT ONLY
     Route::resource('client', ClientController::class);

@@ -48,6 +48,14 @@
             @endif
             @if (auth()->user()->status == 'kontraktor')
             <li class="sidebar-item">
+                <a class="sidebar-link" href="/penghasilan" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-wallet"></i>
+                    </span>
+                    <span class="hide-menu">Penghasilan</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
                 <a class="sidebar-link" href="/jasa" aria-expanded="false">
                     <span>
                         <i class="ti ti-package"></i>

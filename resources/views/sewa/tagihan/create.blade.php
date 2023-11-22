@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Buat Tagihan' . $bangunan->nama_konstruksi)
+@section('title', 'Buat Tagihan ' . $bangunan->nama_konstruksi)
 @section('content')
 <div class="container">
     <div class="row">
@@ -20,6 +20,9 @@
                     <label for="harga" class="form-label">Biaya</label>
                     <input class="form-control summernote" id="harga" type="number" name="harga" placeholder="harga"
                         value="{{old('harga') }}">
+                    <label>Saldo yang masuk akan dipotong 5% untuk biaya admin. <br>Contoh: Rp1.000.000 - (Rp1.000.000 *
+                        5%)
+                        = Rp1.000.000 - Rp50.000 = Rp950.000</label>
                 </div> <button class="btn btn-secondary mt-2" type="submit"><i class="ti ti-device-floppy">
                         Simpan</i></button>
             </form>

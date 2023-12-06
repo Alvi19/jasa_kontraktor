@@ -30,6 +30,7 @@ class JasaController extends Controller
      */
     public function store(Request $request)
     {
+        $kontraktor_id = auth()->user()->kontraktor->id;
         $validatedData = $this->validate($request, [
             'nama'               => 'required',
             'alamat'             => 'required',
@@ -45,6 +46,7 @@ class JasaController extends Controller
 
         $validatedData['foto_kontraktor'] = $gambar;
         $validatedData['foto_pembangunan'] = $gambar;
+        $validatedData['kontraktor_id'] = $kontraktor_id;
 
         Jasa::create($validatedData);
 

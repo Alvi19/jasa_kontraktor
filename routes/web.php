@@ -94,7 +94,7 @@ Route::middleware('auth:web')->group(function () {
         ->as('penghasilan.')
         ->controller(PenghasilanController::class)->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::get('/ambil', 'ambil')->name('ambil');
+            Route::post('/', 'store')->name('store');
         });
 
     // CLIENT ONLY

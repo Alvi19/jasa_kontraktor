@@ -23,9 +23,8 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <strong>Saldo</strong>
-                                        <h4>Rp{{$tagihan_dibayar->sum('harga') - ($tagihan_dibayar->sum('harga') *
-                                            0.05)}}</h4>
-                                        <button class="btn btn-primary btn-sm mt-2">Tarik Saldo</button>
+                                        <h4>Rp{{$saldo}}</h4>
+                                        <button class="btn btn-primary btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#tarikSaldoAlertModal">Tarik Saldo</button>
                                     </div>
                                 </div>
                             </div>
@@ -76,12 +75,12 @@
                                         <tbody>
 
                                             <?php $i = 1 ?>
-                                            @foreach ($tagihan_dibayar as $item)
+                                            @foreach ($penarikan_saldo as $item)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
-                                                <td>Rp{{ $item->harga }}</td>
-                                                <td>{{ $item->bangunan->nama_konstruksi }}</td>
-                                                <td>{{ $item->bangunan->client->user->nama_lengkap }}</td>
+                                                <td>{{ $item->created_at }}</td>
+                                                <td>Rp{{ $item->nominal }}</td>
+                                                <td>{{ $item->status }}</td>
 
                                             </tr>
                                             @endforeach
@@ -92,6 +91,32 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Alert Modal -->
+<div class="modal fade" id="tarikSaldoAlertModal" tabindex="-1" role="dialog" aria-labelledby="tarikSaldoAlertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tarikSaldoAlertModalLabel">Penarikan Saldo</h5>
+                <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulir Harga -->
+                <form action="{{ route('penghasilan.store') }}" method="POST">
+                    @csrf
+                    <div class="form-group mb-2">
+                        <label for="nominal">Nominal Penarikan:</label>
+                        <input type="number" class="form-control" id="nominal" name="nominal" value="{{ old('harga') }}">
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
             </div>
         </div>
     </div>

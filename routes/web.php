@@ -72,7 +72,9 @@ Route::middleware('auth:web')->group(function () {
     });
     // - FOR KONTRAKTOR
     Route::prefix('/data-client')->as('data_client.')->group(function () {
-        Route::resource('/', SewaController::class);
+        Route::get('/', [SewaController::class, 'index'])->name('index');
+        Route::get('/{bangunan}', [SewaController::class, 'show'])->name('show');
+        Route::put('/{bangunan}', [SewaController::class, 'update'])->name('update');
 
         Route::group(['prefix' => '{bangunan}'], function () {
             Route::resource('progress', BangunanProgressController::class);

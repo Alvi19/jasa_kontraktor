@@ -19,7 +19,7 @@ class MainSeeder extends Seeder
         $user1 = User::create([
             'username' => 'kontraktor',
             'password' => bcrypt('kontraktor123'),
-            'nama_lengkap' => 'kontraktor',
+            'nama_lengkap' => 'PT. Kontraktor Cirebon',
             'no_wa' => '089699757575',
             'status' => 'kontraktor',
         ]);
@@ -27,6 +27,7 @@ class MainSeeder extends Seeder
         $kontraktor = Kontraktor::create([
             'user_id' => $user1->id,
             'alamat' => 'bandung',
+            'pemilik' => 'Asep Sedunia',
             'TTL' => '19 mei 2000',
             'email' => 'kontraktor@gmail.com',
             'jenis_kelamin' => 'laki-laki',
@@ -47,8 +48,8 @@ class MainSeeder extends Seeder
         ]);
 
         $user2 = User::create([
-            'username' => 'client2',
-            'password' => bcrypt('client2'),
+            'username' => 'client',
+            'password' => bcrypt('client123'),
             'nama_lengkap' => 'client2',
             'no_wa' => '089699757575',
             'status' => 'client',

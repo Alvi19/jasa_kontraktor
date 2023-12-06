@@ -41,33 +41,30 @@
 
                                     <td>{{ $i++ }}</td>
                                     <td>
+                                        @if (auth()->user()->status == 'kontraktor')
                                         <div class="btn-group-vertical"> @if ($item->status == 'menunggu')
-                                            <button class="btn btn-md m-2 btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#setujuiAlertModal"
-                                                data-update-url="{{ route('data_client.update', $item->id) }}"><i
-                                                    class="ti"></i>Setujui</button>
-                                            <button class="btn btn-md m-2 btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteAlertModal" data-delete-url=""><i
-                                                    class="ti"></i>Tolak</button>
+                                            <button class="btn btn-md btn-success" data-bs-toggle="modal" data-bs-target="#setujuiAlertModal" data-update-url="{{ route('data_client.update', $item->id) }}"><i class="ti"></i>Setujui</button>
+                                            <button class="btn btn-md btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAlertModal" data-delete-url=""><i class="ti"></i>Tolak</button>
                                             @endif
-                                            <a href="{{ route('chat.show', ['id' => $item->client->user_id]) }}"
-                                                class="btn btn-sm btn-primary"><i class="ti ti-message-2"></i>Chat</a>
-                                            @if ($item->status == 'proses') <a
-                                                href="{{ route('data_client.progress.index', $item->id) }}"
-                                                class="btn btn-sm btn-success">Progres</a>
-                                            <a href="{{ route('data_client.tagihan.index', $item->id) }}"
-                                                class="btn btn-sm btn-secondary">Tagihan</a>
+                                            <a href="{{ route('chat.show', ['id' => $item->client->user_id]) }}" class="btn btn-sm btn-primary"><i class="ti ti-message-2"></i>Chat</a>
+                                            @if ($item->status == 'proses') <a href="{{ route('data_client.progress.index', $item->id) }}" class="btn btn-sm btn-success">Progres</a>
+                                            <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Tagihan</a>
                                             @endif
                                         </div>
+                                        @elseif (auth()->user()->status == 'client')
+                                        <a href="{{ route('chat.show', ['id' => $item->kontraktor->user_id]) }}" class="btn btn-sm btn-primary"><i class="ti ti-message-2"></i>Chat</a>
+                                        @if ($item->status == 'proses') <a href="{{ route('data_client.progress.index', $item->id) }}" class="btn btn-sm btn-success">Progres</a>
+                                        <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Tagihan</a>
+                                        @endif
+                                        @endif
                                     </td>
                                     <td>{{ $item->nama_konstruksi }}</td>
                                     <td>{{ $item->client->user->nama_lengkap }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td>{{ $item->harga }}</td>
                                     <td>{{ $item->totalTagihan() }}
-                                        <a href="{{ route('data_client.tagihan.index', $item->id) }}"
-                                            @if($item->totalTagihan() > 0)
-                                            class="btn btn-sm btn-secondary">Bayar</a>
+                                        @if (auth()->user()->status == 'client' && $item->totalTagihan() > 0)
+                                        <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Bayar</a>
                                         @endif
                                     </td>
                                     <td>{{ $item->tanggal_mulai }}</td>
@@ -107,8 +104,7 @@
     </div>
 </div>
 <!-- Alert Modal -->
-<div class="modal fade" id="setujuiAlertModal" tabindex="-1" role="dialog" aria-labelledby="setujuiAlertModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="setujuiAlertModal" tabindex="-1" role="dialog" aria-labelledby="setujuiAlertModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -128,8 +124,7 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="dp_awal">DP Awal Pembangunan:</label>
-                        <input type="number" class="form-control" id="dp_awal" name="dp_awal"
-                            value="{{ old('dp_awal') }}">
+                        <input type="number" class="form-control" id="dp_awal" name="dp_awal" value="{{ old('dp_awal') }}">
                     </div> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary" id="simpanHarga">Simpan</button>
                 </form>
@@ -142,28 +137,28 @@
 @push('script')
 <script>
     // Fungsi ini akan dipanggil ketika tombol "Distujui" diklik
-        $(document).ready(function() {
-            $('#setujuiAlertModal').on('show.bs.modal', function(event) {
-                console.log();
-                // Tampilkan modal
-                var button = $(event.relatedTarget); // Tombol yang membuka modal
+    $(document).ready(function() {
+        $('#setujuiAlertModal').on('show.bs.modal', function(event) {
+            console.log();
+            // Tampilkan modal
+            var button = $(event.relatedTarget); // Tombol yang membuka modal
 
-                var updateUrl = button.data('update-url');
+            var updateUrl = button.data('update-url');
 
-                $('#updateForm').attr('action', updateUrl);
-                $('#modalHarga').modal('show');
+            $('#updateForm').attr('action', updateUrl);
+            $('#modalHarga').modal('show');
 
 
-                // Fungsi ini akan dipanggil saat tombol "Simpan" di dalam modal ditekan
-                // $('#simpanHarga').click(function() {
-                //     // Ambil nilai dari input harga
-                //     var harga = $('#harga').val();
+            // Fungsi ini akan dipanggil saat tombol "Simpan" di dalam modal ditekan
+            // $('#simpanHarga').click(function() {
+            //     // Ambil nilai dari input harga
+            //     var harga = $('#harga').val();
 
-                //     // Lakukan sesuatu dengan nilai harga (misalnya, kirim ke server dengan AJAX)
+            //     // Lakukan sesuatu dengan nilai harga (misalnya, kirim ke server dengan AJAX)
 
-                //     // Tutup modal
-                //     $('#modalHarga').modal('hide');
-            });
+            //     // Tutup modal
+            //     $('#modalHarga').modal('hide');
         });
+    });
 </script>
 @endpush

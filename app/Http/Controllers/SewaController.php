@@ -42,7 +42,7 @@ class SewaController extends Controller
      */
     public function show(Bangunan $bangunan)
     {
-        //
+        // echo "asd";
     }
 
     /**
@@ -58,7 +58,21 @@ class SewaController extends Controller
      */
     public function update(Request $request, Bangunan $bangunan)
     {
-        //
+        $data = $request->validate([
+            'harga' => 'required',
+            'dp_awal' => 'required',
+        ]);
+
+        $bangunan->update([
+            'harga' => $data['harga'],
+            'status' => 'proses'
+        ]);
+        $bangunan->tagihan()->create([
+            'nama_tagihan' => 'DP Awal',
+            'harga' => $data['dp_awal'],
+        ]);
+
+        return redirect()->route('data_client.index')->with('success', 'Data berhasil diupdate');
     }
 
     /**

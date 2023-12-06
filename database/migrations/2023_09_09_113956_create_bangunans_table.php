@@ -23,11 +23,11 @@ return new class extends Migration
             $table->float('luas_lahan');
             $table->float('luas_bangunan');
             $table->string('alamat_bangunan');
-            $table->float('jumlah_tukang');
-            $table->float('jumlah_ruangan');
-            $table->string('keterangan_ruangan');
+            $table->integer('jumlah_tukang');
+            $table->integer('jumlah_ruangan')->nullable();
+            $table->text('keterangan_ruangan')->nullable();
             $table->string('jenis_pengerjaan');
-            $table->string('catatan');
+            $table->text('catatan')->nullable();
             $table->bigInteger('harga')->nullable();
             $table->enum('status', ['menunggu', 'proses', 'ditolak', 'selesai'])->default('menunggu');
             $table->timestamps();

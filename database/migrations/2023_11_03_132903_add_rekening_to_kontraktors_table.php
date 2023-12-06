@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('kontraktors', function (Blueprint $table) {
             $table->dropColumn('nama_bank');
-            $table->drop('rekening');
+            $table->dropColumn('rekening');
         });
     }
 };

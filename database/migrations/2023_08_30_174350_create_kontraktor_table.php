@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('alamat');
+            $table->string('pemilik');
             $table->string('TTL');
             $table->string('email');
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan']);

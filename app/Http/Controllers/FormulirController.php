@@ -40,10 +40,10 @@ class FormulirController extends Controller
             'luas_bangunan' => 'required',
             'alamat_bangunan' => 'required',
             'jumlah_tukang' => 'required',
-            'jumlah_ruangan' => 'required',
-            'keterangan_ruangan' => 'required',
+            'jumlah_ruangan' => 'nullable',
+            'keterangan_ruangan' => 'nullable',
             'jenis_pengerjaan' => 'required',
-            'catatan' => 'required'
+            'catatan' => 'nullable'
         ]);
 
         Bangunan::create($validatedData);

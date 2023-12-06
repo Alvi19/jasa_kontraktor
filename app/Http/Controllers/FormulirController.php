@@ -56,8 +56,13 @@ class FormulirController extends Controller
      */
     public function show($id)
     {
+        $client_id = @auth()->user()->client->id;
+        if (
+            !$client_id
+        ) {
+            return redirect()->route('client.index')->withError('Harap isi data client terlebih dahulu');
+        }
         $kontraktor_id = Jasa::find($id)->kontraktor_id;
-        $client_id = auth()->user()->client->id;
         return view('kontraktor.form', compact('kontraktor_id', 'client_id'));
     }
 

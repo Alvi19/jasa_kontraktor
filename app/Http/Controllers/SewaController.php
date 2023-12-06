@@ -14,9 +14,19 @@ class SewaController extends Controller
     {
         $role = auth()->user()->status;
         if ($role == 'kontraktor') {
-            $data = Bangunan::where('kontraktor_id', auth()->user()->kontraktor->id)->get();
+            $kontraktor_id = @auth()->user()->kontraktor->id;
+            if (!$kontraktor_id) {
+                return redirect()->route('kontraktor.index')->withError('Harap isi data kontraktor terlebih dahulu');
+            }
+
+            $data = Bangunan::where('kontraktor_id', $kontraktor_id)->get();
         } else if ($role == 'client') {
-            $data = Bangunan::where('client_id', auth()->user()->client->id)->get();
+            $client_id = @auth()->user()->client->id;
+            if (!$client_id) {
+                return redirect()->route('client.index')->withError('Harap isi data client terlebih dahulu');
+            }
+
+            $data = Bangunan::where('client_id', $client_id)->get();
         }
         return view('sewa.index', compact('data'));
     }

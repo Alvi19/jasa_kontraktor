@@ -12,7 +12,11 @@ class JasaController extends Controller
      */
     public function index()
     {
-        $data = Jasa::where('kontraktor_id', auth()->user()->kontraktor->id)->get();
+        $kontraktor_id = @auth()->user()->kontraktor->id;
+        if (!$kontraktor_id) {
+            return redirect()->route('kontraktor.index')->withError('Harap isi data kontraktor terlebih dahulu');
+        }
+        $data = Jasa::where('kontraktor_id', $kontraktor_id)->get();
 
         return view('jasa.index')->with('data', $data);
     }
@@ -30,7 +34,11 @@ class JasaController extends Controller
      */
     public function store(Request $request)
     {
-        $kontraktor_id = auth()->user()->kontraktor->id;
+        $kontraktor_id = @auth()->user()->kontraktor->id;
+        if (!$kontraktor_id) {
+            return redirect()->route('kontraktor.index')->withError('Harap isi data kontraktor terlebih dahulu');
+        }
+
         $validatedData = $this->validate($request, [
             'nama'               => 'required',
             'alamat'             => 'required',

@@ -10,7 +10,10 @@ class PenghasilanController extends Controller
 {
     public function index()
     {
-        $kontraktor_id = auth('web')->user()->kontraktor->id;
+        $kontraktor_id = @auth('web')->user()->kontraktor->id;
+        if (!$kontraktor_id) {
+            return redirect()->route('kontraktor.index')->withError('Harap isi data kontraktor terlebih dahulu');
+        }
         $tagihan_dibayar = BangunanTagihan::with('bangunan')
             ->whereHas('bangunan', function ($query) use ($kontraktor_id) {
                 $query->where('kontraktor_id', $kontraktor_id);

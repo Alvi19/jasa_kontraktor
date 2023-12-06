@@ -77,6 +77,15 @@ class PembayaranController extends Controller
         return redirect()->route('admin.pembayaran.index')->withSuccess('Pembayaran berhasil dilakukan');
     }
 
+    public function tolak(PenarikanSaldo $penarikanSaldo)
+    {
+        $penarikanSaldo->update([
+            'status' => 'Gagal'
+        ]);
+
+        return redirect()->route('admin.pembayaran.index')->withSuccess('Pembayaran berhasil ditolak');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

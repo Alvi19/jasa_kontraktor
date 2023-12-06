@@ -59,7 +59,8 @@
                                     </td>
                                     <td>
                                         @if ($item->status == 'Pending')
-                                        <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kirimAlertModal" data-update-url="{{ route('admin.pembayaran.update', $item->id) }}">Bayar</button>
+                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#kirimAlertModal" data-update-url="{{ route('admin.pembayaran.update', $item->id) }}">Bayar</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#tolakAlertModal" data-update-url="{{ route('admin.pembayaran.tolak', $item->id) }}">Tolak</button>
                                         @endif
                                     </td>
                                 </tr>
@@ -99,6 +100,26 @@
     </div>
 </div>
 
+<div class="modal fade" id="tolakAlertModal" tabindex="-1" role="dialog" aria-labelledby="tolakAlertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tolakAlertModalLabel">Yakin ingin menolak Pembayaran?</h5>
+                <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="tolakForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Ya, Tolak</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @endsection
 
@@ -113,6 +134,17 @@
             var updateUrl = button.data('update-url');
 
             $('#updateForm').attr('action', updateUrl);
+        });
+    });
+
+    $(document).ready(function() {
+        $('#tolakAlertModal').on('show.bs.modal', function(event) {
+            // Tampilkan modal
+            var button = $(event.relatedTarget); // Tombol yang membuka modal
+
+            var updateUrl = button.data('update-url');
+
+            $('#tolakForm').attr('action', updateUrl);
         });
     });
 </script>

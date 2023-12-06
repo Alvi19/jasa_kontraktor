@@ -109,6 +109,7 @@ Route::get('/chat/{id}', [ChatController::class, 'show'])->name('chat.show');
 
 
 Route::prefix('/admin')->as('admin.')->group(function () {
+    Route::post('/pembayaran/{penarikanSaldo}/tolak', [PembayaranController::class, 'tolak'])->name('pembayaran.tolak');
     Route::post('/pembayaran/{penarikanSaldo}', [PembayaranController::class, 'update'])->name('pembayaran.update');
     Route::resource('pembayaran', PembayaranController::class)->except(['update']);
 });

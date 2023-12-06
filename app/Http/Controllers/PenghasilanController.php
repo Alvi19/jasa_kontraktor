@@ -17,8 +17,13 @@ class PenghasilanController extends Controller
             })->where('status', 'dibayar')->get();
 
         $penarikan_saldo = PenarikanSaldo::where('kontraktor_id', $kontraktor_id)->get();
+        $penarikan_saldo_sukses = PenarikanSaldo::where('kontraktor_id', $kontraktor_id)
+            ->whereIn(
+                'status',
+                ['Sukses', 'Pending']
+            )->selectRaw('sum(nominal) as nominal')->first();
 
-        $saldo = ($tagihan_dibayar->sum('harga') - ($tagihan_dibayar->sum('harga') * 0.05)) - $penarikan_saldo->sum('nominal');
+        $saldo = ($tagihan_dibayar->sum('harga') - ($tagihan_dibayar->sum('harga') * 0.05)) - $penarikan_saldo_sukses->nominal;
 
         return view('penghasilan.index', compact('saldo', 'tagihan_dibayar', 'penarikan_saldo'));
     }
@@ -36,9 +41,13 @@ class PenghasilanController extends Controller
                 $query->where('kontraktor_id', $kontraktor_id);
             })->where('status', 'dibayar')->get();
 
-        $penarikan_saldo = PenarikanSaldo::where('kontraktor_id', $kontraktor_id)->get();
+        $penarikan_saldo_sukses = PenarikanSaldo::where('kontraktor_id', $kontraktor_id)
+            ->whereIn(
+                'status',
+                ['Sukses', 'Pending']
+            )->selectRaw('sum(nominal) as nominal')->first();
 
-        $saldo = ($tagihan_dibayar->sum('harga') - ($tagihan_dibayar->sum('harga') * 0.05)) - $penarikan_saldo->sum('nominal');
+        $saldo = ($tagihan_dibayar->sum('harga') - ($tagihan_dibayar->sum('harga') * 0.05)) - $penarikan_saldo_sukses->nominal;
 
         if ($data['nominal'] > $saldo) {
             return redirect()->route('penghasilan.index')->withError('Saldo tidak mencukupi');

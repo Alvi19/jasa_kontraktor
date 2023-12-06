@@ -26,6 +26,11 @@ class UserController extends Controller
         if (Auth::attempt($validatedData)) {
             $request->session()->regenerate();
             $auth = Auth::user();
+            if ($auth->status == 'admin') {
+                return redirect()->route('dashboard')
+                    ->withSuccess('You have successfully logged in!');
+            }
+
             if ($auth->status == 'client') {
                 return redirect()->route('client.index')
                     ->withSuccess('You have successfully logged in!');

@@ -75,6 +75,15 @@ class SewaController extends Controller
         return redirect()->route('data_client.index')->with('success', 'Data berhasil diupdate');
     }
 
+    public function reject(Bangunan $bangunan)
+    {
+        $bangunan->update([
+            'status' => 'ditolak'
+        ]);
+
+        return redirect()->route('data_client.index')->with('success', 'Data berhasil diupdate');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

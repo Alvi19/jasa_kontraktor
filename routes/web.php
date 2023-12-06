@@ -75,6 +75,7 @@ Route::middleware('auth:web')->group(function () {
         Route::get('/', [SewaController::class, 'index'])->name('index');
         Route::get('/{bangunan}', [SewaController::class, 'show'])->name('show');
         Route::put('/{bangunan}', [SewaController::class, 'update'])->name('update');
+        Route::put('/{bangunan}/reject', [SewaController::class, 'reject'])->name('reject');
 
         Route::group(['prefix' => '{bangunan}'], function () {
             Route::resource('progress', BangunanProgressController::class);

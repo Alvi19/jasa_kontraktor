@@ -44,7 +44,7 @@
                                         @if (auth()->user()->status == 'kontraktor')
                                         <div class="btn-group-vertical"> @if ($item->status == 'menunggu')
                                             <button class="btn btn-md btn-success" data-bs-toggle="modal" data-bs-target="#setujuiAlertModal" data-update-url="{{ route('data_client.update', $item->id) }}"><i class="ti"></i>Setujui</button>
-                                            <button class="btn btn-md btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAlertModal" data-delete-url=""><i class="ti"></i>Tolak</button>
+                                            <button class="btn btn-md btn-danger" data-bs-toggle="modal" data-bs-target="#tolakAlertModal" data-update-url="{{ route('data_client.reject', $item->id) }}"><i class="ti"></i>Tolak</button>
                                             @endif
                                             <a href="{{ route('chat.show', ['id' => $item->client->user_id]) }}" class="btn btn-sm btn-primary"><i class="ti ti-message-2"></i>Chat</a>
                                             @if ($item->status == 'proses') <a href="{{ route('data_client.progress.index', $item->id) }}" class="btn btn-sm btn-success">Progres</a>
@@ -108,7 +108,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteAlertModalLabel">Konfirmasi Biaya</h5>
+                <h5 class="modal-title" id="setujuiAlertModalLabel">Konfirmasi Biaya</h5>
                 <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -126,7 +126,29 @@
                         <label for="dp_awal">DP Awal Pembangunan:</label>
                         <input type="number" class="form-control" id="dp_awal" name="dp_awal" value="{{ old('dp_awal') }}">
                     </div> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary" id="simpanHarga">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="tolakAlertModal" tabindex="-1" role="dialog" aria-labelledby="tolakAlertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tolakAlertModalLabel">Yakin Tolak Client?</h5>
+                <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulir Harga -->
+                <form id="tolakForm" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">YA</button>
                 </form>
             </div>
         </div>
@@ -146,6 +168,30 @@
             var updateUrl = button.data('update-url');
 
             $('#updateForm').attr('action', updateUrl);
+            $('#modalHarga').modal('show');
+
+
+            // Fungsi ini akan dipanggil saat tombol "Simpan" di dalam modal ditekan
+            // $('#simpanHarga').click(function() {
+            //     // Ambil nilai dari input harga
+            //     var harga = $('#harga').val();
+
+            //     // Lakukan sesuatu dengan nilai harga (misalnya, kirim ke server dengan AJAX)
+
+            //     // Tutup modal
+            //     $('#modalHarga').modal('hide');
+        });
+    });
+
+    $(document).ready(function() {
+        $('#tolakAlertModal').on('show.bs.modal', function(event) {
+            console.log();
+            // Tampilkan modal
+            var button = $(event.relatedTarget); // Tombol yang membuka modal
+
+            var updateUrl = button.data('update-url');
+
+            $('#tolakForm').attr('action', updateUrl);
             $('#modalHarga').modal('show');
 
 

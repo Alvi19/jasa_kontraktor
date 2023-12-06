@@ -62,5 +62,13 @@ class MainSeeder extends Seeder
             'jenis_kelamin' => 'laki-laki',
             'foto' => 'foto.png',
         ]);
+
+        $admin = User::create([
+            'username' => 'admin',
+            'password' => bcrypt('admin123'),
+            'nama_lengkap' => 'admin',
+            'no_wa' => '089699757575',
+            'status' => 'admin',
+        ]);
     }
 }

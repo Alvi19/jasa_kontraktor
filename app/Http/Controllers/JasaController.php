@@ -12,7 +12,7 @@ class JasaController extends Controller
      */
     public function index()
     {
-        $data = Jasa::all();
+        $data = Jasa::where('kontraktor_id', auth()->user()->kontraktor->id)->get();
 
         return view('jasa.index')->with('data', $data);
     }

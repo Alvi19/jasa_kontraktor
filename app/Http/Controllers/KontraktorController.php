@@ -13,9 +13,10 @@ class KontraktorController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
         $data = Kontraktor::where('user_id', auth()->user()->id)->with('user')->first();
 
-        return view('kontraktor.index')->with('data', $data);
+        return view('kontraktor.index')->with(compact('data', 'user'));
     }
 
     /**
@@ -33,6 +34,7 @@ class KontraktorController extends Controller
     {
         $validatedData = $this->validate($request, [
             'username'               => 'required',
+            'email'                  => 'required|email',
             'nama_lengkap'           => 'required',
             'alamat'                 => 'required',
             'TTL'                    => 'required',
@@ -40,12 +42,13 @@ class KontraktorController extends Controller
             'jenis_kelamin'          => 'required',
             'jumlah_tukang'          => 'required',
             'keterangan'             => 'required',
+            'pemilik'                => 'required',
             'nama_bank'              => 'nullable',
             'rekening'               => 'nullable'
         ]);
 
         $userValue = $request->only('username', 'passowrd', 'nama_lengkap', 'no_wa', 'foto_profile');
-        $kontraktorValue = $request->only('alamat', 'TTL', 'email', 'jenis_kelamin', 'foto', 'jumlah_tukang', 'keterangan', 'nama_bank', 'rekening');
+        $kontraktorValue = $request->only('alamat', 'TTL', 'pemilik', 'email', 'jenis_kelamin', 'foto', 'jumlah_tukang', 'keterangan', 'nama_bank', 'rekening');
 
 
         $kontraktor = Kontraktor::where('user_id', auth()->user()->id)->first();

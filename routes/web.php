@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PembayaranController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\BangunanProgressController;
 use App\Http\Controllers\BangunanTagihanController;
@@ -105,3 +106,9 @@ Route::middleware('auth:web')->group(function () {
 Route::get('chat_list', [ChattingController::class, 'index'])->name('chat_list');
 Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
 Route::get('/chat/{id}', [ChatController::class, 'show'])->name('chat.show');
+
+
+Route::prefix('/admin')->as('admin.')->group(function () {
+    Route::post('/pembayaran/{penarikanSaldo}', [PembayaranController::class, 'update'])->name('pembayaran.update');
+    Route::resource('pembayaran', PembayaranController::class)->except(['update']);
+});

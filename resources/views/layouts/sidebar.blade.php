@@ -1,10 +1,8 @@
 <div>
     <div class="brand-logo d-flex align-items-center justify-content-between">
         <a href="/" class="text-nowrap logo-img">
-            <img src="{{ asset('/asset/image/logo.jpeg') }}"
-                style="padding-top: 10px; width: 40px; height: 50px; vertical-align: middle;" alt="Logo" />
-            <span class="text-warning font-weight-bold text-bold"
-                style="vertical-align: middle; margin-left: 10px; font-size: 30px;"><strong>Kontraktor</strong></span>
+            <img src="{{ asset('/asset/image/logo.jpeg') }}" style="padding-top: 10px; width: 40px; height: 50px; vertical-align: middle;" alt="Logo" />
+            <span class="text-warning font-weight-bold text-bold" style="vertical-align: middle; margin-left: 10px; font-size: 30px;"><strong>Kontraktor</strong></span>
 
         </a>
         <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -100,6 +98,8 @@
                     <span class="hide-menu">Riwayat</span>
                 </a>
             </li> --}}
+
+            @if (auth()->user()->status != 'admin')
             <li class="sidebar-item">
                 <a class="sidebar-link" href="/chat" aria-expanded="false">
                     <span>
@@ -108,6 +108,19 @@
                     <span class="hide-menu">Chat</span>
                 </a>
             </li>
+
+            @else
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/admin/pembayaran" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-message-dots"></i>
+                    </span>
+                    <span class="hide-menu">Pembayaran</span>
+                </a>
+            </li>
+
+            @endif
 
             {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">

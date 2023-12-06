@@ -69,7 +69,7 @@
                                                 <th>No</th>
                                                 <th>Tanggal</th>
                                                 <th>Jumlah Penarikan</th>
-                                                <th>Status</th>
+                                                <th>Status / Photo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -80,8 +80,22 @@
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $item->created_at }}</td>
                                                 <td>Rp{{ $item->nominal }}</td>
-                                                <td>{{ $item->status }}</td>
-
+                                                <td>
+                                                    @if ($item->status == 'Pending')
+                                                    <span class="btn btn-sm btn-warning">Pending</span>
+                                                    @elseif ($item->status == 'Sukses')
+                                                    <span class="btn btn-sm btn-success">Sukses</span>
+                                                    @else
+                                                    <span class="btn btn-sm btn-danger">Gagal</span>
+                                                    @endif
+                                                    @if ($item->photo)
+                                                    <a href="{{ asset('upload/' . $item->photo) }}" target="_blank">
+                                                        <img src="{{ asset('upload/' . $item->photo) }}" alt="Photo" width="100">
+                                                    </a>
+                                                    @else
+                                                    <span class="badge badge-danger">Belum Upload</span>
+                                                    @endif
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>

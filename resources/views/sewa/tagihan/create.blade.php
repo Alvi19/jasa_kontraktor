@@ -13,16 +13,14 @@
                 @csrf
                 <div class="mb-3">
                     <label for="nama_tagihan" class="form-label">Nama Tagihan</label>
-                    <input class="form-control summernote" id="nama_tagihan" name="nama_tagihan"
-                        placeholder="nama_tagihan" value="{{ old('nama_tagihan') }}" />
+                    <input class="form-control summernote" id="nama_tagihan" name="nama_tagihan" placeholder="nama_tagihan" value="{{ old('nama_tagihan') }}" />
                 </div>
                 <div class="mb-3">
                     <label for="harga" class="form-label">Biaya</label>
-                    <input class="form-control summernote" id="harga" type="number" name="harga" placeholder="harga"
-                        value="{{old('harga') }}">
-                    <label>Saldo yang masuk akan dipotong 5% untuk biaya admin. <br>Contoh: Rp1.000.000 - (Rp1.000.000 *
-                        5%)
-                        = Rp1.000.000 - Rp50.000 = Rp950.000</label>
+                    <input class="form-control summernote" id="harga" type="number" name="harga" placeholder="harga" value="{{old('harga') }}">
+                    <label>Saldo yang masuk akan dipotong 1% untuk biaya admin. <br>Contoh: Rp1.000.000 - (Rp1.000.000 *
+                        1%)
+                        = Rp1.000.000 - Rp10.000 = Rp990.000</label>
                 </div> <button class="btn btn-secondary mt-2" type="submit"><i class="ti ti-device-floppy">
                         Simpan</i></button>
             </form>

@@ -26,7 +26,7 @@ class PenghasilanController extends Controller
                 ['Sukses', 'Pending']
             )->selectRaw('sum(nominal) as nominal')->first();
 
-        $saldo = ($tagihan_dibayar->sum('harga') - ($tagihan_dibayar->sum('harga') * 0.05)) - $penarikan_saldo_sukses->nominal;
+        $saldo = ($tagihan_dibayar->sum('harga') - ($tagihan_dibayar->sum('harga') * 0.01)) - $penarikan_saldo_sukses->nominal;
 
         return view('penghasilan.index', compact('saldo', 'tagihan_dibayar', 'penarikan_saldo'));
     }
@@ -50,7 +50,7 @@ class PenghasilanController extends Controller
                 ['Sukses', 'Pending']
             )->selectRaw('sum(nominal) as nominal')->first();
 
-        $saldo = ($tagihan_dibayar->sum('harga') - ($tagihan_dibayar->sum('harga') * 0.05)) - $penarikan_saldo_sukses->nominal;
+        $saldo = ($tagihan_dibayar->sum('harga') - ($tagihan_dibayar->sum('harga') * 0.01)) - $penarikan_saldo_sukses->nominal;
 
         if ($data['nominal'] > $saldo) {
             return redirect()->route('penghasilan.index')->withError('Saldo tidak mencukupi');

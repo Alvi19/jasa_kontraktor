@@ -49,6 +49,10 @@
                             <input class="form-control summernote" id="jumlah_ruangan" type="number" name="jumlah_ruangan" placeholder="Jumlah Ruangan" value="{{ old('jumlah_ruangan') }}">
                         </div>
                         <div class="mb-3">
+                            <label for="jumlah_unit" class="form-label">Jumlah Unit</label>
+                            <input class="form-control summernote" id="jumlah_unit" type="number" name="jumlah_unit" placeholder="Jumlah Unit" value="{{ old('jumlah_unit') }}">
+                        </div>
+                        <div class="mb-3">
                             <label for="keterangan_ruangan" class="form-label">Keterangan Ruangan</label>
                             <textarea class="form-control summernote" id="keterangan_ruangan" rows="8" name="keterangan_ruangan" placeholder="Keterangan Ruangan">{{ old('keterangan_ruangan') }}</textarea>
                         </div>

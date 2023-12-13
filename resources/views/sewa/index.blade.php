@@ -30,6 +30,7 @@
                                     <th class="col-3">Alamat</th>
                                     <th>Jumlah Tukang</th>
                                     <th>Jumlah Ruangan</th>
+                                    <th>Jumlah Unit</th>
                                     {{-- <th class="col-3">Jenis Pengerjaan</th> --}}
                                     {{-- <th class="col-3">Catatan</th> --}}
                                 </tr>
@@ -73,6 +74,7 @@
                                     <td>{{ $item->alamat_bangunan }}</td>
                                     <td>{{ $item->jumlah_tukang }}</td>
                                     <td>{{ $item->jumlah_ruangan }}</td>
+                                    <td>{{ $item->jumlah_unit }}</td>
                                     {{-- <td>{{ $item->jenis_pengerjaan }}</td>
                                     <td>{{ $item->catatan }}</td> --}}
                                 </tr>

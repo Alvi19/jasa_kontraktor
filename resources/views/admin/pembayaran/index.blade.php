@@ -58,10 +58,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($item->status == 'Pending')
-                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#kirimAlertModal" data-update-url="{{ route('admin.pembayaran.update', $item->id) }}">Bayar</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#tolakAlertModal" data-update-url="{{ route('admin.pembayaran.tolak', $item->id) }}">Tolak</button>
-                                        @endif
+                                        <button {{ $item->status == 'Pending' ? '' : 'disabled'  }} class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#kirimAlertModal" data-update-url="{{ route('admin.pembayaran.update', $item->id) }}">Bayar</button>
+                                        <button {{ $item->status == 'Pending' ? '' : 'disabled'  }} class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#tolakAlertModal" data-update-url="{{ route('admin.pembayaran.tolak', $item->id) }}">Tolak</button>
                                     </td>
                                 </tr>
                                 @endforeach

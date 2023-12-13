@@ -41,10 +41,13 @@ class JasaController extends Controller
 
         $validatedData = $this->validate($request, [
             'nama'               => 'required',
+            'nama_pembangunan'   => 'required',
             'alamat'             => 'required',
             'jumlah_tukang'      => 'required',
             'riwayat_pembangunan' => 'required',
-            'deskripsi'          => 'required'
+            'deskripsi'          => 'required',
+            'foto_kontraktor'    => 'required',
+            'foto_pembangunan'   => 'required'
         ]);
 
         $file = $request->file('foto_kontraktor');
@@ -85,6 +88,7 @@ class JasaController extends Controller
     {
         $validatedData = $this->validate($request, [
             'nama'               => 'required',
+            'nama_pembangunan'   => 'required',
             'alamat'             => 'required',
             'jumlah_tukang'      => 'required',
             'riwayat_pembangunan' => 'required',

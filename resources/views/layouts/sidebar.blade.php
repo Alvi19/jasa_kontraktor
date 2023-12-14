@@ -120,6 +120,15 @@
                 </a>
             </li>
 
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/data-sewa" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-cards"></i>
+                    </span>
+                    <span class="hide-menu">Riwayat Pembangunan</span>
+                </a>
+            </li>
+
             @endif
 
             {{-- <li class="sidebar-item">

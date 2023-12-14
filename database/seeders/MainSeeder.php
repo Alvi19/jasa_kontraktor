@@ -39,6 +39,7 @@ class MainSeeder extends Seeder
         Jasa::create([
             'kontraktor_id' => $kontraktor->id,
             'foto_kontraktor' => 'foto.png',
+            'nama_pembangunan' => 'Test Pembangunan',
             'nama' => 'kontraktor',
             'alamat' => 'Cirebon',
             'jumlah_tukang' => '20',

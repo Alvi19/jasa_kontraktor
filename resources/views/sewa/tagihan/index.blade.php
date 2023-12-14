@@ -33,7 +33,9 @@
                             <th>Tanggal</th>
                             <th>Biaya</th>
                             <th>Status</th>
+                            @if (auth()->user()->status != 'admin')
                             <th>Aksi</th>
+                            @endif
                             {{-- <th>Persentase Selesai</th> --}}
                         </tr>
                     </thead>
@@ -46,6 +48,7 @@
                             <td>{{ $item->nama_tagihan }}</td>
                             <td>{{ $item->harga }}</td>
                             <td>{{ $item->status }}</td>
+                            @if (auth()->user()->status != 'admin')
                             <td>
                                 @if (auth()->user()->status == 'kontraktor')
                                 @if ($item->status == 'menunggu')
@@ -65,6 +68,7 @@
                                 @endif
                                 @endif
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

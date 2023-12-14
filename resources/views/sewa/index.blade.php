@@ -8,7 +8,13 @@
         <div class="col card-wrapper">
             <div class="card">
                 <div class="card-body border p-4">
-                    <h1 style="text-align: start" class="text-primary mb-3"><strong>Data Client</strong></h1>
+                    <h1 style="text-align: start" class="text-primary mb-3"><strong>
+                            @if (auth()->user()->status != 'admin')
+                            {{auth()->user()->status == 'kontraktor' ? 'Data Client' : 'Data Sewa'}}
+                            @else
+                            Riwayat Pembangunan
+                            @endif
+                        </strong></h1>
                     <hr class="my-0 py-2">
                     {{-- <div class="pd-5"><a href="/jasa/create" class="btn btn-md btn-primary"><i
                                 class="ti ti-clipboard-plus"> Tambah Jasa</i></a>
@@ -57,6 +63,10 @@
                                         @if ($item->status == 'proses') <a href="{{ route('data_client.progress.index', $item->id) }}" class="btn btn-sm btn-success">Progres</a>
                                         <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Tagihan</a>
                                         @endif
+                                        @endif
+                                        @if (auth()->user()->status == 'admin')
+                                        <a href="{{ route('data_client.progress.index', $item->id) }}" class="btn btn-sm btn-success">Progres</a>
+                                        <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Tagihan</a>
                                         @endif
                                     </td>
                                     <td>{{ $item->nama_konstruksi }}</td>

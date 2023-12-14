@@ -2,15 +2,15 @@
 @section('title', 'Dashboard')
 @section('content')
 
-    <section class="section">
-        <div class="section-header">
-            <h1 class=""><strong>Dashboard</strong></h1>
-            <hr class="my-2 py-1">
-        </div>
-        <h3 class="">Selamat Datang </h3>
-        <h1 class="font-weight-bold font-weight-300 py-1"><strong>Admin Kontruksi</strong></h1>
-        <div class="section-body py-5">
-            <div class="row">
+<section class="section">
+    <div class="section-header">
+        <h1 class=""><strong>Dashboard</strong></h1>
+        <hr class="my-2 py-1">
+    </div>
+    <h3 class="">Selamat Datang </h3>
+    <h1 class="font-weight-bold font-weight-300 py-1"><strong>{{ auth()->user()->nama_lengkap }}</strong></h1>
+    <div class="section-body py-5">
+        <!-- <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1 border border-primary">
                         {{-- <div class="card-icon bg-primary">
@@ -68,11 +68,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-9"></div>
-                <div class="col-3"></div>
-            </div>
+            </div> -->
+        <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3"></div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection

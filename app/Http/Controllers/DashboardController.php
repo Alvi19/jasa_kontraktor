@@ -11,6 +11,16 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        // kontraktor
+        $penghasilan = 0;
+        $jasa = 0;
+        $client = 0;
+        $chat = 0;
+
+        // client
+        $tagihan = 0;
+        $sewa = 0;
+        $chat = 0;
         return view('dashboard');
     }
 

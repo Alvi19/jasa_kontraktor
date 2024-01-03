@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('pemilik');
             $table->string('TTL');
-            $table->string('email');
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan']);
             $table->string('foto');
             $table->integer('jumlah_tukang');

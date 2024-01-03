@@ -21,6 +21,7 @@ class MainSeeder extends Seeder
             'password' => bcrypt('kontraktor123'),
             'nama_lengkap' => 'PT. Kontraktor Cirebon',
             'no_wa' => '089699757575',
+            'email' => 'kontraktor@gmail.com',
             'status' => 'kontraktor',
         ]);
 
@@ -29,7 +30,6 @@ class MainSeeder extends Seeder
             'alamat' => 'bandung',
             'pemilik' => 'Asep Sedunia',
             'TTL' => '19 mei 2000',
-            'email' => 'kontraktor@gmail.com',
             'jenis_kelamin' => 'laki-laki',
             'foto' => 'foto.jpg',
             'jumlah_tukang' => '20',
@@ -53,6 +53,7 @@ class MainSeeder extends Seeder
             'password' => bcrypt('client123'),
             'nama_lengkap' => 'client2',
             'no_wa' => '089699757575',
+            'email' => 'client@gmail.com',
             'status' => 'client',
         ]);
 
@@ -69,6 +70,7 @@ class MainSeeder extends Seeder
             'password' => bcrypt('admin123'),
             'nama_lengkap' => 'admin',
             'no_wa' => '089699757575',
+            'email' => 'admin@gmail.com',
             'status' => 'admin',
         ]);
     }

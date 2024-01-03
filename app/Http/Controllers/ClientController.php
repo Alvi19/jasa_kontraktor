@@ -34,12 +34,13 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $validatedData = $this->validate($request, [
+            'email'                  => 'required|email',
             'alamat'                 => 'required',
             'ttl'                    => 'required',
             'jenis_kelamin'          => 'required',
         ]);
 
-        $userValue = $request->only('username', 'passowrd', 'nama_lengkap', 'no_wa', 'foto_profile');
+        $userValue = $request->only('username', 'passowrd', 'nama_lengkap', 'no_wa', 'foto_profile', 'email');
         $clientValue = $request->only('alamat', 'ttl', 'jenis_kelamin');
 
 

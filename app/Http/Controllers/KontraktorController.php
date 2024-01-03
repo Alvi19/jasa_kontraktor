@@ -47,8 +47,8 @@ class KontraktorController extends Controller
             'rekening'               => 'nullable'
         ]);
 
-        $userValue = $request->only('username', 'passowrd', 'nama_lengkap', 'no_wa', 'foto_profile');
-        $kontraktorValue = $request->only('alamat', 'TTL', 'pemilik', 'email', 'jenis_kelamin', 'foto', 'jumlah_tukang', 'keterangan', 'nama_bank', 'rekening');
+        $userValue = $request->only('username', 'passowrd', 'nama_lengkap', 'no_wa', 'foto_profile', 'email');
+        $kontraktorValue = $request->only('alamat', 'TTL', 'pemilik', 'jenis_kelamin', 'foto', 'jumlah_tukang', 'keterangan', 'nama_bank', 'rekening');
 
 
         $kontraktor = Kontraktor::where('user_id', auth()->user()->id)->first();

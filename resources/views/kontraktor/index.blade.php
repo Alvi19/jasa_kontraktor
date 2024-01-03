@@ -38,7 +38,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Instansi</label>
-                            <input id="email" class="form-control summernote" type="email" name="email" placeholder="Email" value="{{ old('email') ?? @$data->email }}" required>
+                            <input id="email" class="form-control summernote" type="email" name="email" placeholder="Email" value="{{ old('email') ?? @$user->email }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat</label>

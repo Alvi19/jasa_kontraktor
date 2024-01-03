@@ -31,6 +31,12 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+// FORGOT PASSWORD
+Route::get('/reset-password/{token}', [UserController::class, 'resetPassword'])->middleware('guest')->name('password.reset');
+Route::post('/reset-password/{token}', [UserController::class, 'resetPasswordPost'])->middleware('guest')->name('password.update');
+
+Route::get('/forgot-password', [UserController::class, 'forgotPassword'])->middleware('guest')->name('password.request');
+Route::post('/forgot-password', [UserController::class, 'forgotPasswordPost'])->middleware('guest')->name('password.email');
 
 // AUTH ROUTE
 Route::middleware('guest')->group(function () {
@@ -52,6 +58,8 @@ Route::middleware('auth:web')->group(function () {
 
     // CHAT FEATURE
     Route::resource('chat', ChatController::class);
+    // Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    // Route::get('/chat/{id}', [ChatController::class, 'show'])->name('chat.show');
     Route::post('/chat/{id}', [ChatController::class, 'send'])->name('chat.send');
 
     // SEWA FEATURE
@@ -102,11 +110,6 @@ Route::middleware('auth:web')->group(function () {
     Route::resource('client', ClientController::class);
     Route::resource('sewakontraktor', SewaKontraktorController::class);
 });
-
-Route::get('chat_list', [ChattingController::class, 'index'])->name('chat_list');
-Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
-Route::get('/chat/{id}', [ChatController::class, 'show'])->name('chat.show');
-
 
 Route::prefix('/admin')->as('admin.')->group(function () {
     Route::post('/pembayaran/{penarikanSaldo}/tolak', [PembayaranController::class, 'tolak'])->name('pembayaran.tolak');

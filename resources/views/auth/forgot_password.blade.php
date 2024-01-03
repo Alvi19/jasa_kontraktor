@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sign In</title>
+    <title>Forgot Password</title>
     <link rel="shortcut icon" type="image/png" href="/asset/template/src/assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="/asset/template/src/assets/css/styles.min.css" />
 </head>
@@ -18,10 +18,9 @@
                     <div class="col-md-8 col-lg-6 col-xxl-3">
                         <div class="card mb-0">
                             <div class="card-body">
-                                <div class="text-center">
-                                    <h1>Selamat Datang</h1>
+                                <div class="text-center mb-4">
+                                    <h3>Forgot Password</h3>
                                 </div>
-                                <p class="text-center">Silahkan login</p>
                                 @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -31,37 +30,31 @@
                                     </ul>
                                 </div>
                                 @endif
+
                                 @if (session('status'))
                                 <div class="alert alert-success">
                                     {{ session('status') }}
                                 </div>
                                 @endif
-                                <form action="{{ route('login') }}" method="POST">
+                                <form action="{{ route('password.email') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="username" class="form-label">Username</label>
-                                        <input type="text" class="form-control form-control-user" id="username" aria-describedby="emailHelp" placeholder="Username" name="username">
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" name="password">
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
-                                            <label class="form-check-label text-dark" for="flexCheckChecked">
-                                                Remeber this Device
-                                            </label>
-                                        </div>
-                                        <a class="text-primary fw-bold" href="{{route('password.request')}}">Forgot Password ?</a>
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Email" name="email">
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">
-                                        Login
+                                        Send Link Reset Password
                                     </button>
                                     <div class="d-flex align-items-center justify-content-center">
                                         <p class="fs-4 mb-1 mx-2 fw-bold">New to </p>
                                         <a class="small" href="{{ route('auth.register') }}"> Create an Account!</a>
                                     </div>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
+                                        <a class="text-primary fw-bold ms-2" href="{{ route('login') }}">Sign
+                                            In</a>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>

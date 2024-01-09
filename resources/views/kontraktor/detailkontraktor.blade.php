@@ -19,7 +19,7 @@
                                         <p class="card-text">{{ $kontraktors->deskripsi }}
                                         </p>
                                         <div class="col">
-                                            <a class="btn btn-md btn-primary ti ti-message-2" href="{{ route('chat.show', ['id' => $kontraktors->id]) }}"> Chat</a>
+                                            <a class="btn btn-md btn-primary ti ti-message-2" href="{{ route('chat.show', $kontraktors->id) }}"> Chat</a>
                                             <a class="btn btn-md btn-primary" href="{{ route('form.show', ['form' => $kontraktors->id]) }}">Sewa</a>
                                         </div>
                                         </p>

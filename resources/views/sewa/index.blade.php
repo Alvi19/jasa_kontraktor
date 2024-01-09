@@ -53,13 +53,13 @@
                                             <button class="btn btn-md btn-success" data-bs-toggle="modal" data-bs-target="#setujuiAlertModal" data-update-url="{{ route('data_client.update', $item->id) }}"><i class="ti"></i>Setujui</button>
                                             <button class="btn btn-md btn-danger" data-bs-toggle="modal" data-bs-target="#tolakAlertModal" data-update-url="{{ route('data_client.reject', $item->id) }}"><i class="ti"></i>Tolak</button>
                                             @endif
-                                            <a href="{{ route('chat.show', ['id' => $item->client->user_id]) }}" class="btn btn-sm btn-primary"><i class="ti ti-message-2"></i>Chat</a>
+                                            <a href="{{ route('chat.show', $item->client->user_id) }}" class="btn btn-sm btn-primary"><i class="ti ti-message-2"></i>Chat</a>
                                             @if ($item->status == 'proses') <a href="{{ route('data_client.progress.index', $item->id) }}" class="btn btn-sm btn-success">Progres</a>
                                             <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Tagihan</a>
                                             @endif
                                         </div>
                                         @elseif (auth()->user()->status == 'client')
-                                        <a href="{{ route('chat.show', ['id' => $item->kontraktor->user_id]) }}" class="btn btn-sm btn-primary"><i class="ti ti-message-2"></i>Chat</a>
+                                        <a href="{{ route('chat.show', $item->kontraktor->user_id) }}" class="btn btn-sm btn-primary"><i class="ti ti-message-2"></i>Chat</a>
                                         @if ($item->status == 'proses') <a href="{{ route('data_client.progress.index', $item->id) }}" class="btn btn-sm btn-success">Progres</a>
                                         <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Tagihan</a>
                                         @endif

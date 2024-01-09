@@ -10,4 +10,9 @@ class Jasa extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function kontraktor()
+    {
+        return $this->belongsTo(Kontraktor::class);
+    }
 }

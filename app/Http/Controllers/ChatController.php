@@ -20,13 +20,18 @@ class ChatController extends Controller
 
         $user = Auth::user();
 
+
         $data = DB::table('users')
             ->select('users.id', 'users.nama_lengkap')
             ->join('messages', function ($join) use ($user) {
-                $join->on('users.id', '=', 'messages.sender_id')->orOn('users.id', '=', 'messages.receiver_id');
-            })->where('users.id', '!=', $user->id)->distinct()->get();
-
-
+                $join->on(function ($query) use ($user) {
+                    $query->on('users.id', '=', 'messages.sender_id')
+                        ->where('messages.receiver_id', '=', $user->id);
+                })->orOn(function ($query) use ($user) {
+                    $query->on('users.id', '=', 'messages.receiver_id')
+                        ->where('messages.sender_id', '=', $user->id);
+                });
+            })->distinct()->get();
 
         // $user->chats->pluck('receiver_id')->concat($user->chats->pluck('sender'))->unique('id');
 

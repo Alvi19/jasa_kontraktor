@@ -35,7 +35,8 @@
                                     <th class="col-3">Luas Bangunan</th>
                                     <th class="col-3">Alamat</th>
                                     <th>Jumlah Ruangan</th>
-                                    <th class="col-3">Dokumen</th>
+                                    <th class="col-3">Foto Observasi</th>
+                                    <th class="col-3">Dokumen Kesepakatan</th>
                                     {{-- <th class="col-3">Jenis Pengerjaan</th> --}}
                                     {{-- <th class="col-3">Catatan</th> --}}
                                 </tr>
@@ -82,6 +83,14 @@
                                     <td>{{ $item->luas_bangunan }}</td>
                                     <td>{{ $item->alamat_bangunan }}</td>
                                     <td>{{ $item->jumlah_ruangan }}</td>
+                                    <td>
+                                        @if ($item->foto)
+                                        <a href="{{ asset('upload/foto/' . $item->foto) }}" target="_blank">Lihat Foto</a>
+                                        @else
+                                        -
+                                        @endif
+                                    </td>
+
                                     <td>
                                         @if ($item->dokumen)
                                         <a href="{{ asset('upload/dokumen/' . $item->dokumen) }}" target="_blank">Lihat Dokumen</a>

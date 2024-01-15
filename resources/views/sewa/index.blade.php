@@ -138,7 +138,7 @@
                         <input type="file" class="form-control" id="foto" name="foto" value="{{ old('foto') }}" required accept="image/*">
                     </div>
                     <div class="form-group mb-2">
-                        <label for="harga">Dokumen Hitam diatas Putih (Foto/Pdf):</label>
+                        <label for="harga">Dokumen Kesepakatan (Foto/Pdf):</label>
                         <input type="file" class="form-control" id="foto" name="dokumen" value="{{ old('foto') }}" required accept="image/*,application/pdf">
                     </div>
                     <div class="form-group mb-2">

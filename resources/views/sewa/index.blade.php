@@ -71,7 +71,7 @@
                                     <td>{{ $item->nama_konstruksi }}</td>
                                     <td>{{ $item->client->user->nama_lengkap }}</td>
                                     <td>{{ $item->status }}</td>
-                                    <td>{{ $item->harga }}</td>
+                                    <td>Rp{{ number_format($item->harga,0,',','.') }}</td>
                                     <td>{{ $item->totalTagihan() }}
                                         @if (auth()->user()->status == 'client' && $item->totalTagihan() > 0)
                                         <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Bayar</a>

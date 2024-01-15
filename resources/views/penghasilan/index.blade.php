@@ -22,16 +22,15 @@
                             <div class="col-4 ">
                                 <div class="card">
                                     <div class="card-body">
-                                        <strong>Saldo</strong>
-                                        <h4>Rp{{$saldo}}</h4>
-                                        <button class="btn btn-primary btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#tarikSaldoAlertModal">Tarik Saldo</button>
+                                        <strong>Total Penghasilan</strong>
+                                        <h4>Rp{{ number_format($saldo,0,',','.') }}</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-7">
-                                <h3>Riwayat Pendapatan</h3>
+                            <div class="col-12">
+                                <h3>Riwayat Penghasilan</h3>
                                 <div class="table-responsive border-bottom-dark">
                                     <table class="table table-bordered table-stripped table-hover m-0">
                                         <thead>
@@ -50,52 +49,10 @@
                                             <tr>
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $item->updated_at }}</td>
-                                                <td>Rp{{ $item->harga - ($item->harga * 0.05) }}</td>
+                                                <td>Rp{{ number_format($item->harga - ($item->harga * 0.05),0,',','.') }}</td>
                                                 <td>{{ $item->bangunan->nama_konstruksi }}</td>
                                                 <td>{{ $item->bangunan->client->user->nama_lengkap }}</td>
 
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-5">
-                                <h3>Riwayat Tarik Saldo</h3>
-                                <div class="table-responsive border-bottom-dark">
-                                    <table class="table table-bordered table-stripped table-hover m-0">
-                                        <thead>
-                                            <tr class="text-bold text-light bg-primary">
-                                                <th>No</th>
-                                                <th>Tanggal</th>
-                                                <th>Jumlah Penarikan</th>
-                                                <th>Status / Photo</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <?php $i = 1 ?>
-                                            @foreach ($penarikan_saldo as $item)
-                                            <tr>
-                                                <td>{{ $i++ }}</td>
-                                                <td>{{ $item->created_at }}</td>
-                                                <td>Rp{{ $item->nominal }}</td>
-                                                <td>
-                                                    @if ($item->status == 'Pending')
-                                                    <span class="btn btn-sm btn-warning">Pending</span>
-                                                    @elseif ($item->status == 'Sukses')
-                                                    <span class="btn btn-sm btn-success">Sukses</span>
-                                                    @else
-                                                    <span class="btn btn-sm btn-danger">Gagal</span>
-                                                    @endif
-                                                    @if ($item->photo)
-                                                    <a href="{{ asset('upload/' . $item->photo) }}" target="_blank">
-                                                        <img src="{{ asset('upload/' . $item->photo) }}" alt="Photo" width="100">
-                                                    </a>
-                                                    @else
-                                                    <span class="badge badge-danger">Belum Upload</span>
-                                                    @endif
-                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>

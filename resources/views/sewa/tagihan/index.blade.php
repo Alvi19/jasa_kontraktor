@@ -46,7 +46,7 @@
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>{{ $item->nama_tagihan }}</td>
-                                <td>{{ $item->harga }}</td>
+                                <td>Rp{{ number_format($item->harga,0,',','.') }}</td>
                                 <td>{{ $item->status }}</td>
                                 <td>
                                     @if ($item->foto_transfer_admin)
@@ -78,7 +78,7 @@
                                 @else
                                 <td>
                                     @if ($item->status == 'dibayar')
-                                    <button class="btn btn-md btn-success" data-bs-toggle="modal" data-bs-target="#kirimDanaModal" data-kirim-url="{{ route('data_client.tagihan.kirim', [$bangunan, $item->id]) }}">Kirim Dana</button>
+                                    <button class="btn btn-md btn-success" data-bs-toggle="modal" data-bs-target="#kirimDanaModal" data-nominal="{{number_format($item->harga - ($item->harga * 0.01),0,',','.')}}" data-kirim-url="{{ route('data_client.tagihan.kirim', [$bangunan, $item->id]) }}">Kirim Dana</button>
                                     @else
                                     <button disabled class="btn btn-md btn-success">Kirim Dana</button>
                                     @endif
@@ -148,6 +148,10 @@
             </div>
             <div class="modal-body">
                 <!-- Formulir Harga -->
+                <div class="mb-2">
+                    Jumlah Nominal yang perlu ditransfer oleh admin
+                    <h5 class="modal-title" id="kirimDanaModalLabel">Rp<span id="nominal"></span></h5>
+                </div>
                 <form id="updateForm" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-2">
@@ -180,6 +184,9 @@
             var button = $(event.relatedTarget); // Tombol yang membuka modal
 
             var updateUrl = button.data('kirim-url');
+            var nominal = button.data('nominal');
+
+            $('#nominal').html(nominal);
 
             $('#updateForm').attr('action', updateUrl);
             $('#modalHarga').modal('show');

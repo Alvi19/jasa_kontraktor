@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BangunanTagihan;
 use App\Models\PenarikanSaldo;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,9 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        $penarikan_saldo = PenarikanSaldo::with('kontraktor')->get();
+        $tagihan = BangunanTagihan::all();
 
-        return view('admin.pembayaran.index', compact('penarikan_saldo'));
+        return view('admin.pembayaran.index', compact('tagihan'));
     }
 
     /**

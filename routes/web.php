@@ -112,7 +112,6 @@ Route::middleware('auth:web')->group(function () {
     // CLIENT ONLY
     Route::resource('client', ClientController::class);
     Route::resource('sewakontraktor', SewaKontraktorController::class);
-    Route::get('penarikan', [PenarikanSaldoKontraktorController::class, 'index'])->name('penarikan-kontraktor');
 });
 
 Route::prefix('/admin')->as('admin.')->group(function () {

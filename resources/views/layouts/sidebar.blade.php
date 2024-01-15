@@ -74,14 +74,6 @@
             @endif
             @if (auth()->user()->status == 'client')
             <li class="sidebar-item">
-                <a class="sidebar-link" href="/penarikan" aria-expanded="false">
-                    <span>
-                        <i class="ti ti-message-dots"></i>
-                    </span>
-                    <span class="hide-menu">Penarikan Kontraktor</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
                 <a class="sidebar-link" href="/data-sewa" aria-expanded="false">
                     <span>
                         <i class="ti ti-cards"></i>

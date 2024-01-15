@@ -33,8 +33,11 @@
                                 <th>Tagihan</th>
                                 <th>Tanggal</th>
                                 <th>Biaya</th>
+                                @if (auth()->user()->status != 'client')
+                                <th>Biaya Admin (1%)</th>
+                                @endif
                                 <th>Status</th>
-                                <th>Bukti Transfer Admin</th>
+                                <th>Bukti Transfer Admin @if (auth()->user()->status == 'client')<br> (Potongan 1%)@endif</th>
                                 <th>Aksi</th>
                                 {{-- <th>Persentase Selesai</th> --}}
                             </tr>
@@ -47,6 +50,9 @@
                                 <td>{{ $item->created_at }}</td>
                                 <td>{{ $item->nama_tagihan }}</td>
                                 <td>Rp{{ number_format($item->harga,0,',','.') }}</td>
+                                @if (auth()->user()->status != 'client')
+                                <td>Rp{{ number_format($item->harga * 0.01,0,',','.') }}</td>
+                                @endif
                                 <td>{{ $item->status }}</td>
                                 <td>
                                     @if ($item->foto_transfer_admin)

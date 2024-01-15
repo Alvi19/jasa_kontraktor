@@ -38,7 +38,7 @@
                                                 <th>No</th>
                                                 <th>Tanggal</th>
                                                 <th>Jumlah Pendapatan</th>
-                                                <th>Bangunan</th>
+                                                <th>Proyek</th>
                                                 <th>Client</th>
                                             </tr>
                                         </thead>

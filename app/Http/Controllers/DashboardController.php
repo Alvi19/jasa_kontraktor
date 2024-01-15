@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BangunanTagihan;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,16 +12,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // kontraktor
-        $penghasilan = 0;
-        $jasa = 0;
-        $client = 0;
-        $chat = 0;
+        if (auth()->user()->status == 'admin') {
+            $penghasilan = BangunanTagihan::whereIn('status', ['dibayar', 'selesai'])->get();
+            $penghasilan_total = ($penghasilan->sum('harga') * 0.01);
 
-        // client
-        $tagihan = 0;
-        $sewa = 0;
-        $chat = 0;
+            $pembayaran = BangunanTagihan::whereIn('status', ['dibayar'])->get();
+            $pembayaran = $pembayaran->sum('harga') - ($pembayaran->sum('harga') * 0.01);
+            return view('dashboard', compact('penghasilan', 'penghasilan_total', 'pembayaran'));
+        }
         return view('dashboard');
     }
 

@@ -17,7 +17,7 @@
                                 <th>Kontraktor</th>
                                 <th>Tagihan</th>
                                 <th>Tanggal</th>
-                                <th>Biaya</th>
+                                <th>Nominal</th>
                                 <th>Status</th>
                                 <th>Bukti Transfer Admin</th>
                                 <th>Aksi</th>
@@ -34,7 +34,7 @@
                                 <td>{{ $item->bangunan->kontraktor->user->nama_lengkap }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>{{ $item->nama_tagihan }}</td>
-                                <td>Rp{{ number_format($item->harga,0,',','.') }}</td>
+                                <td>Rp{{ number_format($item->harga - ($item->harga * 0.01),0,',','.') }}</td>
                                 <td>{{ $item->status }}</td>
                                 <td>
                                     @if ($item->foto_transfer_admin)

@@ -10,6 +10,64 @@
     <h3 class="">Selamat Datang </h3>
     <h1 class="font-weight-bold font-weight-300 py-1"><strong>{{ auth()->user()->nama_lengkap }}</strong></h1>
     <div class="section-body py-5">
+        @if (auth()->user()->status == 'admin')
+        <div class="row">
+            <div class="col-4 ">
+                <div class="card">
+                    <div class="card-body">
+                        <strong>Total Penghasilan</strong>
+                        <h4>Rp{{ number_format($penghasilan_total,0,',','.') }}</h4>
+                    </div>
+                </div>
+            </div>
+
+            <a href="{{ route('admin.pembayaran.index') }}" class="col-4 ">
+                <div class="card">
+                    <div class="card-body">
+                        <strong>Total Pembayaran ke Kontraktor</strong>
+                        <h4>Rp{{ number_format($pembayaran,0,',','.') }}</h4>
+                    </div>
+                </div>
+            </a>
+
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Riwayat Penghasilan</h3>
+                        <div class="table-responsive border-bottom-dark">
+                            <table class="table table-bordered table-stripped table-hover m-0">
+                                <thead>
+                                    <tr class="text-bold text-light bg-primary">
+                                        <th>No</th>
+                                        <th>Tanggal</th>
+                                        <th>Jumlah Pendapatan</th>
+                                        <th>Proyek</th>
+                                        <th>Client</th>
+                                        <th>kontraktor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <?php $i = 1 ?>
+                                    @foreach ($penghasilan as $item)
+                                    <tr>
+                                        <td>{{ $i++ }}</td>
+                                        <td>{{ $item->updated_at }}</td>
+                                        <td>Rp{{ number_format(($item->harga * 0.05),0,',','.') }}</td>
+                                        <td>{{ $item->bangunan->nama_konstruksi }}</td>
+                                        <td>{{ $item->bangunan->client->user->nama_lengkap }}</td>
+                                        <td>{{ $item->bangunan->kontraktor->user->nama_lengkap }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
         <!-- <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1 border border-primary">

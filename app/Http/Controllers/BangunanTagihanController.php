@@ -210,4 +210,25 @@ class BangunanTagihanController extends Controller
             return abort(404);
         }
     }
+
+    public function kirim(Bangunan $bangunan, BangunanTagihan $tagihan, Request $request)
+    {
+        $request->validate([
+            'foto' => 'required|image|mimes:jpeg,png,jpg'
+        ]);
+
+
+        $foto = $request->file('foto');
+
+        $foto_name = time() . '_' . $foto->getClientOriginalName();
+
+        $foto->move(public_path('upload/foto_transfer_admin'), $foto_name);
+
+        $tagihan->update([
+            'foto_transfer_admin' => $foto_name,
+            'status' => 'selesai',
+        ]);
+
+        return redirect()->route('data_sewa.tagihan.index', $bangunan);
+    }
 }

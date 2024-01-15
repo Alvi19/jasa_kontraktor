@@ -28,7 +28,7 @@ class SewaController extends Controller
 
             $data = Bangunan::where('client_id', $client_id)->get();
         } else if ($role == 'admin') {
-            $data = Bangunan::whereIn('status', ['proses', 'selesai'])->get();
+            $data = Bangunan::all();
         }
         return view('sewa.index', compact('data'));
     }

@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormulirController;
 use App\Http\Controllers\JasaController;
 use App\Http\Controllers\KontraktorController;
+use App\Http\Controllers\PenarikanSaldoKontraktorController;
 use App\Http\Controllers\PenghasilanController;
 use App\Http\Controllers\SewaController;
 use App\Http\Controllers\SewaKontraktorController;
@@ -93,6 +94,8 @@ Route::middleware('auth:web')->group(function () {
             Route::get('tagihan/{tagihan}/pay', [BangunanTagihanController::class, 'pay'])->name('tagihan.pay');
             Route::get('tagihan/{tagihan}/pay-success', [BangunanTagihanController::class, 'paySuccess'])->name('tagihan.pay_success');
             Route::get('tagihan/{tagihan}/pay-failed', [BangunanTagihanController::class, 'payFailed'])->name('tagihan.pay_failed');
+
+            Route::post('tagihan/{tagihan}/kirim', [BangunanTagihanController::class, 'kirim'])->name('tagihan.kirim');
         });
     });
 
@@ -109,6 +112,7 @@ Route::middleware('auth:web')->group(function () {
     // CLIENT ONLY
     Route::resource('client', ClientController::class);
     Route::resource('sewakontraktor', SewaKontraktorController::class);
+    Route::get('penarikan', [PenarikanSaldoKontraktorController::class, 'index'])->name('penarikan-kontraktor');
 });
 
 Route::prefix('/admin')->as('admin.')->group(function () {

@@ -7,6 +7,10 @@
     <title>@yield('title')</title>
     {{-- <link rel="shortcut icon" type="image/png" href="/asset/template/src/assets/images/logos/favicon.png" /> --}}
     <link rel="stylesheet" href="/asset/template/src/assets/css/styles.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" />
+
 </head>
 
 <body>
@@ -468,9 +472,36 @@
     <script src="/asset/template/src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/asset/template/src/assets/js/sidebarmenu.js"></script>
     <script src="/asset/template/src/assets/js/app.min.js"></script>
-    <script src="/asset/template/src/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
     <script src="/asset/template/src/assets/libs/simplebar/dist/simplebar.js"></script>
     <script src="/asset/template/src/assets/js/dashboard.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            let table = new DataTable('.datatable', {
+                dom: 'Bfrtip',
+                buttons: [{
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4]
+                        },
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4]
+                        }
+                    },
+                ]
+            });
+        });
+    </script>
 
     @stack('script')
 

@@ -40,6 +40,7 @@ class FormulirController extends Controller
             'luas_bangunan' => 'required',
             'alamat_bangunan' => 'required',
             'jumlah_ruangan' => 'nullable',
+            'jumlah_lantai' => 'nullable',
             'keterangan_ruangan' => 'nullable',
             'jenis_pengerjaan' => 'required',
             'catatan' => 'nullable'

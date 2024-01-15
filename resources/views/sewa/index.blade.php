@@ -35,6 +35,7 @@
                                     <th class="col-3">Luas Bangunan</th>
                                     <th class="col-3">Alamat</th>
                                     <th>Jumlah Ruangan</th>
+                                    <th>Jumlah Lantai</th>
                                     <th class="col-3">Foto Observasi</th>
                                     <th class="col-3">Dokumen Kesepakatan</th>
                                     {{-- <th class="col-3">Jenis Pengerjaan</th> --}}
@@ -73,7 +74,7 @@
                                     <td>{{ $item->client->user->nama_lengkap }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td>Rp{{ number_format($item->harga,0,',','.') }}</td>
-                                    <td>{{ $item->totalTagihan() }}
+                                    <td>Rp{{ number_format($item->totalTagihan(),0,',','.') }}
                                         @if (auth()->user()->status == 'client' && $item->totalTagihan() > 0)
                                         <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Bayar</a>
                                         @endif
@@ -83,6 +84,7 @@
                                     <td>{{ $item->luas_bangunan }}</td>
                                     <td>{{ $item->alamat_bangunan }}</td>
                                     <td>{{ $item->jumlah_ruangan }}</td>
+                                    <td>{{ $item->jumlah_lantai }}</td>
                                     <td>
                                         @if ($item->foto)
                                         <a href="{{ asset('upload/foto/' . $item->foto) }}" target="_blank">Lihat Foto</a>
@@ -154,10 +156,7 @@
                         <label for="harga">Estimasi Biaya:</label>
                         <input type="number" class="form-control" id="harga" name="harga" value="{{ old('harga') }}" required>
                     </div>
-                    <div class="form-group mb-2">
-                        <label for="dp_awal">DP Awal Pembangunan:</label>
-                        <input type="number" class="form-control" id="dp_awal" name="dp_awal" value="{{ old('dp_awal') }}" required>
-                    </div> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>

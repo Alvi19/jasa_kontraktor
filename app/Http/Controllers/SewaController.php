@@ -74,11 +74,11 @@ class SewaController extends Controller
             'dokumen' => 'required|file|mimes:pdf,jpeg,png,jpg',
             'foto' => 'required|file|mimes:jpeg,png,jpg',
             'harga' => 'required',
-            'dp_awal' => 'required',
         ]);
 
         $dokumen = $request->file('dokumen');
         $foto = $request->file('foto');
+        $dp_awal = $request->harga * 0.3;
 
         $dokumen_name = time() . '_' . $dokumen->getClientOriginalName();
         $foto_name = time() . '_' . $foto->getClientOriginalName();
@@ -92,9 +92,10 @@ class SewaController extends Controller
             'harga' => $data['harga'],
             'status' => 'proses'
         ]);
+
         $bangunan->tagihan()->create([
             'nama_tagihan' => 'DP Awal',
-            'harga' => $data['dp_awal'],
+            'harga' => $dp_awal,
         ]);
 
         return redirect()->route('data_client.index')->with('success', 'Data berhasil diupdate');

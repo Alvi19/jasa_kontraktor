@@ -34,9 +34,8 @@
                                     <th class="col-3">Luas Lahan</th>
                                     <th class="col-3">Luas Bangunan</th>
                                     <th class="col-3">Alamat</th>
-                                    <th>Jumlah Tukang</th>
                                     <th>Jumlah Ruangan</th>
-                                    <th>Jumlah Unit</th>
+                                    <th class="col-3">Dokumen</th>
                                     {{-- <th class="col-3">Jenis Pengerjaan</th> --}}
                                     {{-- <th class="col-3">Catatan</th> --}}
                                 </tr>
@@ -82,9 +81,14 @@
                                     <td>{{ $item->luas_lahan }}</td>
                                     <td>{{ $item->luas_bangunan }}</td>
                                     <td>{{ $item->alamat_bangunan }}</td>
-                                    <td>{{ $item->jumlah_tukang }}</td>
                                     <td>{{ $item->jumlah_ruangan }}</td>
-                                    <td>{{ $item->jumlah_unit }}</td>
+                                    <td>
+                                        @if ($item->dokumen)
+                                        <a href="{{ asset('upload/dokumen/' . $item->dokumen) }}" target="_blank">Lihat Dokumen</a>
+                                        @else
+                                        -
+                                        @endif
+                                    </td>
                                     {{-- <td>{{ $item->jenis_pengerjaan }}</td>
                                     <td>{{ $item->catatan }}</td> --}}
                                 </tr>
@@ -120,23 +124,30 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="setujuiAlertModalLabel">Konfirmasi Biaya</h5>
+                <h5 class="modal-title" id="setujuiAlertModalLabel">Konfirmasi Pesanan</h5>
                 <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <!-- Formulir Harga -->
-                <form id="updateForm" method="POST">
+                <form id="updateForm" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
+                    <div class="form-group mb-2">
+                        <label for="harga">Foto Observasi Lokasi:</label>
+                        <input type="file" class="form-control" id="foto" name="foto" value="{{ old('foto') }}" required accept="image/*">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="harga">Dokumen Hitam diatas Putih (Foto/Pdf):</label>
+                        <input type="file" class="form-control" id="foto" name="dokumen" value="{{ old('foto') }}" required accept="image/*,application/pdf">
+                    </div>
                     <div class="form-group mb-2">
                         <label for="harga">Estimasi Biaya:</label>
-                        <input type="number" class="form-control" id="harga" name="harga" value="{{ old('harga') }}">
+                        <input type="number" class="form-control" id="harga" name="harga" value="{{ old('harga') }}" required>
                     </div>
                     <div class="form-group mb-2">
                         <label for="dp_awal">DP Awal Pembangunan:</label>
-                        <input type="number" class="form-control" id="dp_awal" name="dp_awal" value="{{ old('dp_awal') }}">
+                        <input type="number" class="form-control" id="dp_awal" name="dp_awal" value="{{ old('dp_awal') }}" required>
                     </div> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>

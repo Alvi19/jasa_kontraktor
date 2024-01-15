@@ -71,11 +71,24 @@ class SewaController extends Controller
     public function update(Request $request, Bangunan $bangunan)
     {
         $data = $request->validate([
+            'dokumen' => 'required|file|mimes:pdf,jpeg,png,jpg',
+            'foto' => 'required|file|mimes:jpeg,png,jpg',
             'harga' => 'required',
             'dp_awal' => 'required',
         ]);
 
+        $dokumen = $request->file('dokumen');
+        $foto = $request->file('foto');
+
+        $dokumen_name = time() . '_' . $dokumen->getClientOriginalName();
+        $foto_name = time() . '_' . $foto->getClientOriginalName();
+
+        $dokumen->move(public_path('upload/dokumen'), $dokumen_name);
+        $foto->move(public_path('upload/foto'), $foto_name);
+
         $bangunan->update([
+            'dokumen' => $dokumen_name,
+            'foto' => $foto_name,
             'harga' => $data['harga'],
             'status' => 'proses'
         ]);

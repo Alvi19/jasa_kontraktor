@@ -41,16 +41,8 @@
                             <input class="form-control summernote" id="alamat_bangunan" type="text" name="alamat_bangunan" placeholder="Alamat Bangunan" value="{{ old('alamat_bangunan') }}" required>
                         </div>
                         <div class="mb-3">
-                            <label for="jumlah_tukang" class="form-label">Jumlah Tukang <span class="text-danger">*<span></label>
-                            <input class="form-control summernote" id="jumlah_tukang" type="number" name="jumlah_tukang" placeholder="Jumlah Tukang" value="{{ old('jumlah_tukang') }}" required>
-                        </div>
-                        <div class="mb-3">
                             <label for="jumlah_ruangan" class="form-label">Jumlah Ruangan</label>
                             <input class="form-control summernote" id="jumlah_ruangan" type="number" name="jumlah_ruangan" placeholder="Jumlah Ruangan" value="{{ old('jumlah_ruangan') }}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="jumlah_unit" class="form-label">Jumlah Unit</label>
-                            <input class="form-control summernote" id="jumlah_unit" type="number" name="jumlah_unit" placeholder="Jumlah Unit" value="{{ old('jumlah_unit') }}">
                         </div>
                         <div class="mb-3">
                             <label for="keterangan_ruangan" class="form-label">Keterangan Ruangan</label>

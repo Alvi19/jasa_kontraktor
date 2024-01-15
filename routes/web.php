@@ -83,7 +83,7 @@ Route::middleware('auth:web')->group(function () {
     Route::prefix('/data-client')->as('data_client.')->group(function () {
         Route::get('/', [SewaController::class, 'index'])->name('index');
         Route::get('/{bangunan}', [SewaController::class, 'show'])->name('show');
-        Route::put('/{bangunan}', [SewaController::class, 'update'])->name('update');
+        Route::post('/{bangunan}', [SewaController::class, 'update'])->name('update');
         Route::put('/{bangunan}/reject', [SewaController::class, 'reject'])->name('reject');
 
         Route::group(['prefix' => '{bangunan}'], function () {

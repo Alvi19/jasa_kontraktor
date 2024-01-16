@@ -45,6 +45,7 @@
                                         <th>Proyek</th>
                                         <th>Client</th>
                                         <th>kontraktor</th>
+                                        <th>status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,10 +55,11 @@
                                     <tr>
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $item->updated_at }}</td>
-                                        <td>Rp{{ number_format(($item->harga * 0.05),0,',','.') }}</td>
+                                        <td>Rp{{ number_format(($item->harga * 0.01),0,',','.') }}</td>
                                         <td>{{ $item->bangunan->nama_konstruksi }}</td>
                                         <td>{{ $item->bangunan->client->user->nama_lengkap }}</td>
                                         <td>{{ $item->bangunan->kontraktor->user->nama_lengkap }}</td>
+                                        <td>{{ $item->status }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

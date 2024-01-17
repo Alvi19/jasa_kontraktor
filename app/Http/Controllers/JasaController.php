@@ -50,13 +50,18 @@ class JasaController extends Controller
             'foto_pembangunan'   => 'required'
         ]);
 
-        $file = $request->file('foto_kontraktor');
-        $file = $request->file('foto_pembangunan');
-        $gambar = time() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('upload'), $gambar);
+        if ($request->hasFile('foto_kontraktor')) {
+            $fotoKontraktor = time() . '_kontraktor_' . $request->file('foto_kontraktor')->getClientOriginalName();
+            $request->file('foto_kontraktor')->move(public_path('upload'), $fotoKontraktor);
+        }
 
-        $validatedData['foto_kontraktor'] = $gambar;
-        $validatedData['foto_pembangunan'] = $gambar;
+        if ($request->hasFile('foto_pembangunan')) {
+            $fotoPembangunan = time() . '_pembangunan_' . $request->file('foto_pembangunan')->getClientOriginalName();
+            $request->file('foto_pembangunan')->move(public_path('upload'), $fotoPembangunan);
+        }
+
+        $validatedData['foto_kontraktor'] = $fotoKontraktor;
+        $validatedData['foto_pembangunan'] = $fotoPembangunan;
         $validatedData['kontraktor_id'] = $kontraktor_id;
 
         Jasa::create($validatedData);

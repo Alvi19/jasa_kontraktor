@@ -45,7 +45,7 @@
                                 </td>
                                 <td>
                                     @if ($item->status == 'dibayar')
-                                    <button class="btn btn-md btn-success" data-bs-toggle="modal" data-bs-target="#kirimDanaModal" data-nominal="{{number_format($item->harga - ($item->harga * 0.01),0,',','.')}}" data-kirim-url="{{ route('data_client.tagihan.kirim', [$item->bangunan, $item->id]) }}">Kirim Dana</button>
+                                    <button class="btn btn-md btn-success" data-bs-toggle="modal" data-bs-target="#kirimDanaModal" data-bank="{{$item->bangunan->kontraktor->nama_bank}}" data-rekening="{{$item->bangunan->kontraktor->rekening}}" data-nominal="{{number_format($item->harga - ($item->harga * 0.01),0,',','.')}}" data-kirim-url="{{ route('data_client.tagihan.kirim', [$item->bangunan, $item->id]) }}">Kirim Dana</button>
                                     @else
                                     <button disabled class="btn btn-md btn-success">Kirim Dana</button>
                                     @endif
@@ -96,6 +96,14 @@
                     <h5 class="modal-title" id="kirimDanaModalLabel">Rp<span id="nominal"></span></h5>
                 </div>
 
+                <!-- No Rekening -->
+                <div class="mb-2">
+                    No Rekening Kontraktor
+                    <h5 class="modal-title" id="kirimDanaModalLabel"><span id="rekening"></span></h5>
+                    Nama Bank
+                    <h5 class="modal-title" id="kirimDanaModalLabel"><span id="bank"></span></h5>
+                </div>
+
                 <form id="updateForm" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-2">
@@ -122,8 +130,12 @@
 
             var updateUrl = button.data('kirim-url');
             var nominal = button.data('nominal');
+            var rekening = button.data('rekening');
+            var bank = button.data('bank');
 
             $('#nominal').html(nominal);
+            $('#rekening').html(rekening);
+            $('#bank').html(bank);
             $('#updateForm').attr('action', updateUrl);
             $('#modalHarga').modal('show');
 

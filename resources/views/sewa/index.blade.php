@@ -65,7 +65,7 @@
                                         <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Tagihan</a>
                                         @endif
                                         @endif
-                                        @if (auth()->user()->status == 'admin')
+                                        @if (auth()->user()->status == 'admin' && $item->status != 'ditolak')
                                         <a href="{{ route('data_client.progress.index', $item->id) }}" class="btn btn-sm btn-success">Progres</a>
                                         <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Tagihan</a>
                                         @endif

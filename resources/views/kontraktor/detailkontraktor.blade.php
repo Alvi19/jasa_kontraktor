@@ -16,7 +16,7 @@
                                 <div class="col-md-8">
                                     <div class="card-body text-lg-start">
                                         <h5 class="card-title text-bold">{{ $kontraktors->nama }}</h5>
-                                        <p class="card-text">{{ $kontraktors->deskripsi }}
+                                        <p class="card-text">{!! nl2br($kontraktors->deskripsi) !!}
                                         </p>
                                         <div class="col">
                                             <a class="btn btn-md btn-primary ti ti-message-2" href="{{ route('chat.show', $kontraktors->kontraktor->user_id) }}"> Chat</a>

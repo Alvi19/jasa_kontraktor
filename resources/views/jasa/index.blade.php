@@ -42,7 +42,7 @@
                                     <td>
                                         <img height="80px" src="{{ '/upload/' . $item->foto_pembangunan }}" alt="">
                                     </td>
-                                    <td>{{ $item->deskripsi }}</td>
+                                    <td>{!! $item->deskripsi !!}</td>
                                     <td>
                                         <a href="{{ route('jasa.edit', [$item->id]) }}" class="btn btn-md btn-warning mb-1"><i class="ti ti-edit"></i></a>
                                         <button class="btn btn-md btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAlertModal" data-delete-url="{{ route('jasa.destroy', $item->id) }}"><i class="ti ti-trash"></i></button>

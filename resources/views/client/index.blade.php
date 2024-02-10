@@ -7,7 +7,7 @@
         <div class="col card-wrapper">
             <div class="card">
                 <div class="card-body">
-                    <h1 style="text-align:center" class="text-primary mb-4"><strong>Data Client</strong></h1>
+                    <h1 style="text-align:center" class="text-primary mb-4"><strong>Riwayat Jasa</strong></h1>
                     @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

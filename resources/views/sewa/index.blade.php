@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Data Client')
+@section('title', 'Riwayat Jasa')
 @section('content')
 <div class="container-fluid mt-2">
     {{--
@@ -10,7 +10,7 @@
                 <div class="card-body border p-4">
                     <h1 style="text-align: start" class="text-primary mb-3"><strong>
                             @if (auth()->user()->status != 'admin')
-                            {{auth()->user()->status == 'kontraktor' ? 'Data Client' : 'Data Sewa'}}
+                            {{auth()->user()->status == 'kontraktor' ? 'Riwayat Jasa' : 'Data Sewa'}}
                             @else
                             Riwayat Pembangunan
                             @endif

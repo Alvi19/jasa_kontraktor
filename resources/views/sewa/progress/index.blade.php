@@ -7,7 +7,7 @@
             <h2>Riwayat Progres Kerja Kontraktor</h2>
             <nav class="" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="font-italic mt-1"><a href="{{ route('data_client.index') }}">Data Client</a>
+                    <li class="font-italic mt-1"><a href="{{ route('data_client.index') }}">Riwayat Jasa</a>
                     </li>
                     <li class="ti ti-chevron-right mt-2 font-italic"><a href="">Riwayat Progress Kerja
                             Kontraktor</a></li>

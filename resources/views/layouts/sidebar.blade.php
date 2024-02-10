@@ -68,7 +68,7 @@
                     <span>
                         <i class="ti ti-users"></i>
                     </span>
-                    <span class="hide-menu">Data Client</span>
+                    <span class="hide-menu">Riwayat Jasa</span>
                 </a>
             </li>
             @endif

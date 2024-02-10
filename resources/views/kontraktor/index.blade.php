@@ -37,6 +37,23 @@
                             <input id="pemilik" class="form-control summernote" type="text" name="pemilik" placeholder="Nama" value="{{ old('pemilik') ?? @$data->pemilik }}" required>
                         </div>
                         <div class="mb-3">
+                            <label for="nik" class="form-label">NIK</label>
+                            <input id="nik" class="form-control summernote" type="number" name="nik" placeholder="NIK" value="{{ old('nik') ?? @$data->nik }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="foto_ktp" class="form-label">Foto KTP</label>
+                                    <input id="foto_ktp" type="file" class="form-control form-control-sm" name="foto_ktp" id="exampleInputEmail1" required accept="image/*">
+                                </div>
+                                @if (@$data->foto_ktp)
+                                <div class="col">
+                                    <img src="{{ asset('upload/' . @$data->foto_ktp) }}" alt="Foto KTP" class="img-thumbnail" style="width: 100px; height: 100px;">
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             <label for="email" class="form-label">Email Instansi</label>
                             <input id="email" class="form-control summernote" type="email" name="email" placeholder="Email" value="{{ old('email') ?? @$user->email }}" required>
                         </div>
@@ -63,10 +80,6 @@
                                     'perempuan' ? 'selected' : '' }}>
                                     Perempuan</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="keterangan" class="form-label">Foto</label>
-                            <input id="keterangan" type="file" class="form-control form-control-sm" name="file" id="exampleInputEmail1" value="{{ old('foto') ?? @$data->foto }}">
                         </div>
                         <div class="mb-3">
                             <label for="jumlah_tukang" class="form-label">Jumlah Tukang</label>

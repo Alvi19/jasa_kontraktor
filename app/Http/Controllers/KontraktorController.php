@@ -44,26 +44,34 @@ class KontraktorController extends Controller
             'keterangan'             => 'required',
             'pemilik'                => 'required',
             'nama_bank'              => 'nullable',
-            'rekening'               => 'nullable'
+            'rekening'               => 'nullable',
+            'nik'                    => 'required',
+            'foto_ktp'               => 'required',
         ]);
 
         $userValue = $request->only('username', 'passowrd', 'nama_lengkap', 'no_wa', 'foto_profile', 'email');
-        $kontraktorValue = $request->only('alamat', 'TTL', 'pemilik', 'jenis_kelamin', 'foto', 'jumlah_tukang', 'keterangan', 'nama_bank', 'rekening');
+        $kontraktorValue = $request->only('alamat', 'nik', 'foto_ktp', 'TTL', 'pemilik', 'jenis_kelamin', 'jumlah_tukang', 'keterangan', 'nama_bank', 'rekening');
 
 
         $kontraktor = Kontraktor::where('user_id', auth()->user()->id)->first();
         $user = User::find(auth()->user()->id);
+
+        if ($request->hasFile('foto_ktp')) {
+            $fotoKtp = time() . '_ktp_' . $request->file('foto_ktp')->getClientOriginalName();
+            $request->file('foto_ktp')->move(public_path('upload'), $fotoKtp);
+
+            $kontraktorValue['foto_ktp'] = $fotoKtp;
+            $kontraktorValue['foto'] = $fotoKtp;
+        }
 
         $user->update($userValue);
         if ($kontraktor) {
             $kontraktor->update($kontraktorValue);
         } else {
             $kontraktorValue['user_id'] = auth()->user()->id;
-            $kontraktorValue['foto'] = auth()->user()->id;
 
             Kontraktor::create($kontraktorValue);
         }
-
 
 
         return redirect()->route('kontraktor.index');

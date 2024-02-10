@@ -21,14 +21,6 @@
                     <form action="{{ route('kontraktor.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input id="username" class="form-control summernote" type="text" name="username" placeholder="Username" value="{{ old('username') ?? @$user->username }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input id="password" class="form-control summernote" type="password" name="password" placeholder="Password">
-                        </div>
-                        <div class="mb-3">
                             <label for="nama_lengkap" class="form-label">Nama Instansi</label>
                             <input id="nama_lengkap" class="form-control summernote" type="text" name="nama_lengkap" placeholder="Nama" value="{{ old('nama_lengkap') ?? @$user->nama_lengkap }}" required>
                         </div>

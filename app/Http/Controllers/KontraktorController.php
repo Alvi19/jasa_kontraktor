@@ -33,7 +33,6 @@ class KontraktorController extends Controller
     public function store(Request $request)
     {
         $validatedData = $this->validate($request, [
-            'username'               => 'required',
             'email'                  => 'required|email',
             'nama_lengkap'           => 'required',
             'alamat'                 => 'required',
@@ -49,7 +48,7 @@ class KontraktorController extends Controller
             'foto_ktp'               => 'required',
         ]);
 
-        $userValue = $request->only('username', 'passowrd', 'nama_lengkap', 'no_wa', 'foto_profile', 'email');
+        $userValue = $request->only('nama_lengkap', 'no_wa', 'foto_profile', 'email');
         $kontraktorValue = $request->only('alamat', 'nik', 'foto_ktp', 'TTL', 'pemilik', 'jenis_kelamin', 'jumlah_tukang', 'keterangan', 'nama_bank', 'rekening');
 
 

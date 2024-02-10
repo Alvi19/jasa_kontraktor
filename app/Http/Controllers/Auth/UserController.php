@@ -158,4 +158,27 @@ class UserController extends Controller
 
         return redirect()->route('login');
     }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('auth.profile', compact('user'));
+    }
+
+    public function profileStore(Request $request)
+    {
+        $validatedData = $this->validate($request, [
+            'username'               => 'required',
+            'password'               => 'nullable',
+        ]);
+
+        $user = Auth::user();
+        $user->username = $request->username;
+        if ($request->password) {
+            $user->password = $request->password;
+        }
+        $user->save();
+
+        return back()->withSuccess('Profile updated successfully!');
+    }
 }

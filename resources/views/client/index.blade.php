@@ -20,14 +20,6 @@
                     <form action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input class="form-control summernote" type="text" name="username" placeholder="Username" value="{{ old('username') ?? @$user->username }}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input class="form-control summernote" type="password" name="password" placeholder="Password">
-                        </div>
-                        <div class="mb-3">
                             <label for="nama" class="form-label">Nama</label>
                             <input class="form-control summernote" type="text" name="nama_lengkap" placeholder="Nama" value="{{ old('nama_lengkap') ?? @$user->nama_lengkap }}">
                         </div>

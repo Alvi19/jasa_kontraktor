@@ -40,7 +40,7 @@ class ClientController extends Controller
             'jenis_kelamin'          => 'required',
         ]);
 
-        $userValue = $request->only('username', 'passowrd', 'nama_lengkap', 'no_wa', 'foto_profile', 'email');
+        $userValue = $request->only('nama_lengkap', 'no_wa', 'foto_profile', 'email');
         $clientValue = $request->only('alamat', 'ttl', 'jenis_kelamin');
 
 

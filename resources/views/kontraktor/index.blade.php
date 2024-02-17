@@ -21,6 +21,14 @@
                     <form action="{{ route('kontraktor.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input id="username" class="form-control summernote" type="text" name="username" placeholder="Username" value="{{ old('username') ?? @$user->username }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input id="password" class="form-control summernote" type="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="mb-3">
                             <label for="nama_lengkap" class="form-label">Nama Instansi</label>
                             <input id="nama_lengkap" class="form-control summernote" type="text" name="nama_lengkap" placeholder="Nama" value="{{ old('nama_lengkap') ?? @$user->nama_lengkap }}" required>
                         </div>
@@ -38,9 +46,9 @@
                                     <label for="foto_ktp" class="form-label">Foto KTP</label>
                                     <input id="foto_ktp" type="file" class="form-control form-control-sm" name="foto_ktp" id="exampleInputEmail1" required accept="image/*">
                                 </div>
-                                @if (@$data->foto_ktp)
+                                @if (@$user->foto_ktp)
                                 <div class="col">
-                                    <img src="{{ asset('upload/' . @$data->foto_ktp) }}" alt="Foto KTP" class="img-thumbnail" style="width: 100px; height: 100px;">
+                                    <img src="{{ asset('upload/' . @$user->foto_ktp) }}" alt="Foto KTP" class="img-thumbnail" style="width: 100px; height: 100px;">
                                 </div>
                                 @endif
                             </div>

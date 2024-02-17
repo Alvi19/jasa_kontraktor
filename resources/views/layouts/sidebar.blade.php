@@ -26,26 +26,6 @@
             </li>
             @if (auth()->user()->status == 'kontraktor')
             <li class="sidebar-item">
-                <a class="sidebar-link" href="/kontraktor" aria-expanded="false">
-                    <span>
-                        <i class="ti ti-user-circle"></i>
-                    </span>
-                    <span class="hide-menu">Data Kontraktor</span>
-                </a>
-            </li>
-            @endif
-            @if (auth()->user()->status == 'client')
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="/client" aria-expanded="false">
-                    <span>
-                        <i class="ti ti-user-circle"></i>
-                    </span>
-                    <span class="hide-menu">Data Klien</span>
-                </a>
-            </li>
-            @endif
-            @if (auth()->user()->status == 'kontraktor')
-            <li class="sidebar-item">
                 <a class="sidebar-link" href="/penghasilan" aria-expanded="false">
                     <span>
                         <i class="ti ti-wallet"></i>

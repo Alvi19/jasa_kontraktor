@@ -40,12 +40,24 @@ class ClientController extends Controller
             'jenis_kelamin'          => 'required',
         ]);
 
-        $userValue = $request->only('nama_lengkap', 'no_wa', 'foto_profile', 'email');
+        $userValue = $request->only('username', 'nik', 'foto_ktp', 'nama_lengkap', 'no_wa', 'foto_profile', 'email');
         $clientValue = $request->only('alamat', 'ttl', 'jenis_kelamin');
 
 
         $client = Client::where('user_id', auth()->user()->id)->first();
         $user = User::find(auth()->user()->id);
+
+        if ($request->hasFile('foto_ktp')) {
+            $fotoKtp = time() . '_ktp_' . $request->file('foto_ktp')->getClientOriginalName();
+            $request->file('foto_ktp')->move(public_path('upload'), $fotoKtp);
+
+            $userValue['foto_ktp'] = $fotoKtp;
+        }
+
+        if ($request->password) {
+            $userValue['password'] = $request->password;
+        }
+
 
         $user->update($userValue);
         if ($client) {

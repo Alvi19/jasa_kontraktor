@@ -48,9 +48,8 @@ class KontraktorController extends Controller
             'foto_ktp'               => 'required',
         ]);
 
-        $userValue = $request->only('nama_lengkap', 'no_wa', 'foto_profile', 'email');
-        $kontraktorValue = $request->only('alamat', 'nik', 'foto_ktp', 'TTL', 'pemilik', 'jenis_kelamin', 'jumlah_tukang', 'keterangan', 'nama_bank', 'rekening');
-
+        $userValue = $request->only('username', 'nik', 'foto_ktp', 'nama_lengkap', 'no_wa', 'foto_profile', 'email');
+        $kontraktorValue = $request->only('alamat', 'TTL', 'pemilik', 'jenis_kelamin', 'jumlah_tukang', 'keterangan', 'nama_bank', 'rekening');
 
         $kontraktor = Kontraktor::where('user_id', auth()->user()->id)->first();
         $user = User::find(auth()->user()->id);
@@ -59,8 +58,11 @@ class KontraktorController extends Controller
             $fotoKtp = time() . '_ktp_' . $request->file('foto_ktp')->getClientOriginalName();
             $request->file('foto_ktp')->move(public_path('upload'), $fotoKtp);
 
-            $kontraktorValue['foto_ktp'] = $fotoKtp;
-            $kontraktorValue['foto'] = $fotoKtp;
+            $userValue['foto_ktp'] = $fotoKtp;
+        }
+
+        if ($request->password) {
+            $userValue['password'] = $request->password;
         }
 
         $user->update($userValue);

@@ -29,9 +29,9 @@
                             @foreach ($tagihan as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
-                                <td>{{ $item->bangunan->nama_konstruksi }}</td>
-                                <td>{{ $item->bangunan->client->user->nama_lengkap }}</td>
-                                <td>{{ $item->bangunan->kontraktor->user->nama_lengkap }}</td>
+                                <td><a href="/data-client/{{$item->bangunan->id}}/progress">{{ $item->bangunan->nama_konstruksi }}</a></td>
+                                <td><a href="/profile/client/{{$item->bangunan->client_id}}">{{ $item->bangunan->client->user->nama_lengkap }}</a></td>
+                                <td><a href="/profile/kontraktor/{{$item->bangunan->kontraktor_id}}">{{ $item->bangunan->kontraktor->user->nama_lengkap }}</a></td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>{{ $item->nama_tagihan }}</td>
                                 <td>Rp{{ number_format($item->harga - ($item->harga * 0.01),0,',','.') }}</td>

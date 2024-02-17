@@ -50,8 +50,8 @@
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $item->updated_at }}</td>
                                                 <td>Rp{{ number_format($item->harga - ($item->harga * 0.05),0,',','.') }}</td>
-                                                <td>{{ $item->bangunan->nama_konstruksi }}</td>
-                                                <td>{{ $item->bangunan->client->user->nama_lengkap }}</td>
+                                                <td><a href="/data-client/{{$item->bangunan->id}}/progress">{{ $item->bangunan->nama_konstruksi }}</a></td>
+                                                <td><a href="/profile/client/{{$item->bangunan->client_id}}">{{ $item->bangunan->client->user->nama_lengkap }}</a></td>
 
                                             </tr>
                                             @endforeach

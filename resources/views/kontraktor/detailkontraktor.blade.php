@@ -21,6 +21,7 @@
                                         <div class="col">
                                             <a class="btn btn-md btn-primary ti ti-message-2" href="{{ route('chat.show', $kontraktors->kontraktor->user_id) }}"> Chat</a>
                                             <a class="btn btn-md btn-primary" href="{{ route('form.show', ['form' => $kontraktors->id]) }}">Sewa</a>
+                                            <a class="btn btn-md btn-primary" href="{{ route('profile.kontraktor', ['data' => $kontraktors->id]) }}">Profile</a>
                                         </div>
                                         </p>
                                     </div>

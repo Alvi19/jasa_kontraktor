@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
+use App\Models\Kontraktor;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -159,10 +161,16 @@ class UserController extends Controller
         return redirect()->route('login');
     }
 
-    public function profile()
+    public function profileKontraktor(Kontraktor $data)
     {
-        $user = Auth::user();
-        return view('auth.profile', compact('user'));
+        $user = User::find($data->user_id);
+        return view('auth.profile-kontraktor', compact('data', 'user'));
+    }
+
+    public function profileClient(Client $data)
+    {
+        $user = User::find($data->user_id);
+        return view('auth.profile-client', compact('data', 'user'));
     }
 
     public function profileStore(Request $request)

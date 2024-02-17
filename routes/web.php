@@ -52,7 +52,8 @@ Route::middleware('guest')->group(function () {
 // AFTER LOGIN
 Route::middleware('auth:web')->group(function () {
     // LOGOUT
-    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::get('/profile/kontraktor/{data}', [UserController::class, 'profileKontraktor'])->name('profile.kontraktor');
+    Route::get('/profile/client/{data}', [UserController::class, 'profileClient'])->name('profile.client');
     Route::post('/profile', [UserController::class, 'profileStore'])->name('profile.store');
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 

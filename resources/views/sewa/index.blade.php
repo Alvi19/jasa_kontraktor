@@ -70,8 +70,8 @@
                                         <a href="{{ route('data_client.tagihan.index', $item->id) }}" class="btn btn-sm btn-secondary">Tagihan</a>
                                         @endif
                                     </td>
-                                    <td>{{ $item->nama_konstruksi }}</td>
-                                    <td>{{ $item->client->user->nama_lengkap }}</td>
+                                    <td><a href="/profile/kontraktor/{{$item->kontraktor_id}}">{{ $item->nama_konstruksi }}</a></td>
+                                    <td><a href="/profile/client/{{$item->client_id}}">{{ $item->client->user->nama_lengkap }}</a></td>
                                     <td>{{ $item->status }}</td>
                                     <td>Rp{{ number_format($item->harga,0,',','.') }}</td>
                                     <td>Rp{{ number_format($item->totalTagihan(),0,',','.') }}
